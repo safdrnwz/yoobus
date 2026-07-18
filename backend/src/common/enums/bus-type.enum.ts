@@ -1,0 +1,8 @@
+export enum BusType {
+  AC_SEATER = 'AC_SEATER',
+  NON_AC_SEATER = 'NON_AC_SEATER',
+  AC_SLEEPER = 'AC_SLEEPER',
+  NON_AC_SLEEPER = 'NON_AC_SLEEPER',
+  VOLVO = 'VOLVO',
+}
+export const AC_BUS_TYPES = [BusType.AC_SEATER, BusType.AC_SLEEPER, BusType.VOLVO];

@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Fallbacks only. ThemeProvider overwrites every one of these on mount from the
+     Global Settings API — they exist so the very first paint is never unstyled. */
+  :root {
+    --color-primary: #0e6e56;
+    --color-primary-hover: #0c6049;
+    --color-primary-soft: #e7f1ee;
+    --color-primary-fg: #ffffff;
+    --color-secondary: #14263f;
+    --color-secondary-soft: #e8eaee;
+    --color-secondary-fg: #ffffff;
+    --color-accent: #e1a106;
+    --color-accent-soft: #fcf3e0;
+    --color-accent-fg: #101010;
+    --color-background: #f6f7f5;
+    --color-surface: #ffffff;
+    --color-surface-sunken: #f7f7f6;
+    --color-surface-raised: #ffffff;
+    --color-text: #16211c;
+    --color-text-muted: #5f6b64;
+    --color-text-faint: #98a29c;
+    --color-border: #e2e6e1;
+    --color-border-strong: #c9d0cb;
+    --color-sidebar: #ffffff;
+    --color-sidebar-fg: #16211c;
+    --color-sidebar-active: #e7f1ee;
+    --color-footer: #14263f;
+    --color-footer-fg: #c9d2ce;
+    --color-success: #12805c;
+    --color-success-soft: #e5f2ee;
+    --color-warning: #b76e00;
+    --color-warning-soft: #f8f0e2;
+    --color-danger: #c0392b;
+    --color-danger-soft: #f8ebe9;
+    --color-info: #1e6fa8;
+    --color-info-soft: #e7f0f6;
+
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-heading: 'Sora', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --font-weight-body: 400;
+    --font-weight-heading: 600;
+    --line-height: 1.55;
+    --letter-spacing: 0em;
+    --text-xs: 12.44px;
+    --text-base: 14px;
+    --text-lg: 15.75px;
+    --text-xl: 17.72px;
+    --text-2xl: 19.93px;
+    --text-3xl: 22.42px;
+
+    --radius-surface: 10px;
+    --radius-control: 8px;
+    --border-width: 1px;
+    --shadow-card: 0 1px 2px rgba(16, 24, 20, 0.04);
+    --shadow-pop: 0 8px 24px -8px rgba(16, 24, 20, 0.16);
+
+    --density-gutter: 24px;
+    --density-row: 12px;
+    --control-height: 38px;
+    --button-height: 38px;
+    --button-padding: 0 16px;
+    --button-weight: 500;
+    --button-transform: none;
+    --button-tracking: 0em;
+
+    --sidebar-width: 264px;
+    --content-max-width: 1440px;
+    --motion-duration: 160ms;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-size: var(--text-base);
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    line-height: var(--line-height);
+    letter-spacing: var(--letter-spacing);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  /* Keyboard users must always be able to see where they are. */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Figures line up in columns — essential in a table of fares and PNRs. */
+  .tabular {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: 999px;
+    border: 3px solid var(--color-background);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-text-faint); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* The signature: a rail that marks the active route, the way a lane marks a road. */
+  .nav-rail {
+    position: relative;
+  }
+  .nav-rail[data-active='true']::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--color-primary);
+  }
+}

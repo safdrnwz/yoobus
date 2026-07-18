@@ -1,0 +1,5391 @@
+[
+{
+"m": "GET",
+"p": "/reports/revenue",
+"fn": "revenue",
+"roles": [
+"ACCOUNTANT",
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/shared/reports/reports.controller.ts"
+},
+{
+"m": "GET",
+"p": "/reports/manifest/:tripId",
+"fn": "manifest",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"DRIVER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/shared/reports/reports.controller.ts"
+},
+{
+"m": "GET",
+"p": "/reports/gst",
+"fn": "gst",
+"roles": [
+"ACCOUNTANT",
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/shared/reports/reports.controller.ts"
+},
+{
+"m": "POST",
+"p": "/users/staff",
+"fn": "createStaff",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateStaffDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/users/users.controller.ts"
+},
+{
+"m": "GET",
+"p": "/users/staff",
+"fn": "listStaff",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/users/users.controller.ts"
+},
+{
+"m": "POST",
+"p": "/users/platform-staff",
+"fn": "createPlatformStaff",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreatePlatformStaffDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/users/users.controller.ts"
+},
+{
+"m": "GET",
+"p": "/users/platform-staff",
+"fn": "listPlatformStaff",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/users/users.controller.ts"
+},
+{
+"m": "GET",
+"p": "/me",
+"fn": "get",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/profile/profile.controller.ts"
+},
+{
+"m": "GET",
+"p": "/me/profile-completion",
+"fn": "profileCompletion",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/profile/profile.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/me",
+"fn": "update",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "UpdateProfileDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/profile/profile.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/me",
+"fn": "deactivate",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/profile/profile.controller.ts"
+},
+{
+"m": "GET",
+"p": "/me/dashboard",
+"fn": "dashboard",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/profile/profile.controller.ts"
+},
+{
+"m": "GET",
+"p": "/me/bookings",
+"fn": "bookings",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"limit"
+],
+"file": "src/modules/customer/profile/profile.controller.ts"
+},
+{
+"m": "GET",
+"p": "/me/passengers",
+"fn": "listPassengers",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/profile/profile.controller.ts"
+},
+{
+"m": "POST",
+"p": "/me/passengers",
+"fn": "addPassenger",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "SavePassengerDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/profile/profile.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/me/passengers/:id",
+"fn": "removePassenger",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/profile/profile.controller.ts"
+},
+{
+"m": "GET",
+"p": "/loyalty",
+"fn": "summary",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/loyalty/loyalty.controller.ts"
+},
+{
+"m": "POST",
+"p": "/loyalty/referral/redeem",
+"fn": "redeemReferral",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "RedeemReferralDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/loyalty/loyalty.controller.ts"
+},
+{
+"m": "POST",
+"p": "/loyalty/points/redeem",
+"fn": "redeemPoints",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "RedeemPointsDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/loyalty/loyalty.controller.ts"
+},
+{
+"m": "GET",
+"p": "/wallet",
+"fn": "summary",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/wallet/wallet.controller.ts"
+},
+{
+"m": "POST",
+"p": "/wallet/topup",
+"fn": "topup",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "TopupDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/wallet/wallet.controller.ts"
+},
+{
+"m": "POST",
+"p": "/wallet/pay",
+"fn": "pay",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "WalletPayDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/wallet/wallet.controller.ts"
+},
+{
+"m": "POST",
+"p": "/otp/request",
+"fn": "request",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "RequestOtpDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/otp/otp.controller.ts"
+},
+{
+"m": "POST",
+"p": "/otp/verify",
+"fn": "verify",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "VerifyOtpDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/otp/otp.controller.ts"
+},
+{
+"m": "POST",
+"p": "/tracking/ping",
+"fn": "ping",
+"roles": [
+"DRIVER",
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "PingDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/tracking/tracking.controller.ts"
+},
+{
+"m": "GET",
+"p": "/tracking/:tripId/live",
+"fn": "live",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/customer/tracking/tracking.controller.ts"
+},
+{
+"m": "GET",
+"p": "/custom-roles/grantable",
+"fn": "grantable",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/custom-roles/custom-roles.controller.ts"
+},
+{
+"m": "GET",
+"p": "/custom-roles",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/custom-roles/custom-roles.controller.ts"
+},
+{
+"m": "POST",
+"p": "/custom-roles",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateCustomRoleDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/custom-roles/custom-roles.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/custom-roles/:id",
+"fn": "update",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "UpdateCustomRoleDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/custom-roles/custom-roles.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/custom-roles/:id",
+"fn": "remove",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/custom-roles/custom-roles.controller.ts"
+},
+{
+"m": "POST",
+"p": "/custom-roles/assign",
+"fn": "assign",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "AssignCustomRoleDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/custom-roles/custom-roles.controller.ts"
+},
+{
+"m": "GET",
+"p": "/admin/operators/:id/buses",
+"fn": "buses",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "GET",
+"p": "/admin/operators/:id/drivers",
+"fn": "drivers",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "GET",
+"p": "/admin/operators/:id/routes",
+"fn": "routes",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "GET",
+"p": "/admin/operators/:id/trips",
+"fn": "trips",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "GET",
+"p": "/admin/operators/:id/bookings",
+"fn": "bookings",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "GET",
+"p": "/admin/operators/:id/billing",
+"fn": "billing",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "GET",
+"p": "/admin/operators/:id/records-export",
+"fn": "records",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "PUT",
+"p": "/admin/operators/:id",
+"fn": "update",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "UpdateOperatorDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/admin/operators/:id",
+"fn": "delOperator",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/admin/buses/:id",
+"fn": "delBus",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/admin/drivers/:id",
+"fn": "delDriver",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/admin/routes/:id",
+"fn": "delRoute",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "GET",
+"p": "/admin/logs",
+"fn": "logs",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId",
+"userId",
+"role",
+"method",
+"action",
+"from",
+"to",
+"page",
+"pageSize"
+],
+"file": "src/modules/platform/admin/admin.controller.ts"
+},
+{
+"m": "POST",
+"p": "/platform/compliance/requests",
+"fn": "createRequest",
+"roles": [
+"SUPERADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT"
+],
+"public": false,
+"perm": [
+"PROCESS_DATA_ACCESS_REQUEST"
+],
+"bodyDto": "CreateDsrDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/compliance/compliance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform/compliance/requests",
+"fn": "listRequests",
+"roles": [
+"SUPERADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT"
+],
+"public": false,
+"perm": [
+"PROCESS_DATA_ACCESS_REQUEST"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/compliance/compliance.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/platform/compliance/requests/:id/status",
+"fn": "advance",
+"roles": [
+"SUPERADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT"
+],
+"public": false,
+"perm": [
+"PROCESS_DATA_DELETION_REQUEST"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/compliance/compliance.controller.ts"
+},
+{
+"m": "POST",
+"p": "/platform/compliance/consent",
+"fn": "recordConsent",
+"roles": [
+"SUPERADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT"
+],
+"public": false,
+"perm": [
+"CONFIGURE_CONSENT"
+],
+"bodyDto": "RecordConsentDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/compliance/compliance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform/compliance/consent",
+"fn": "consentStatus",
+"roles": [
+"SUPERADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT"
+],
+"public": false,
+"perm": [
+"CONFIGURE_CONSENT"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"subjectEmail",
+"purpose"
+],
+"file": "src/modules/platform/compliance/compliance.controller.ts"
+},
+{
+"m": "POST",
+"p": "/platform/compliance/keys/rotate",
+"fn": "rotateKey",
+"roles": [
+"SUPERADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT"
+],
+"public": false,
+"perm": [
+"CONFIGURE_ENCRYPTION_KEYS"
+],
+"bodyDto": "RotateKeyDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/compliance/compliance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform/compliance/keys/rotations",
+"fn": "keyRotations",
+"roles": [
+"SUPERADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT"
+],
+"public": false,
+"perm": [
+"CONFIGURE_ENCRYPTION_KEYS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/compliance/compliance.controller.ts"
+},
+{
+"m": "POST",
+"p": "/corporate",
+"fn": "create",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateCorporateDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/corporate/corporate.controller.ts"
+},
+{
+"m": "GET",
+"p": "/corporate",
+"fn": "list",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/corporate/corporate.controller.ts"
+},
+{
+"m": "POST",
+"p": "/corporate/:id/employees",
+"fn": "addEmployee",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": "AddEmployeeDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/corporate/corporate.controller.ts"
+},
+{
+"m": "GET",
+"p": "/corporate/:id/employees",
+"fn": "employees",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/corporate/corporate.controller.ts"
+},
+{
+"m": "GET",
+"p": "/corporate/:id/statement",
+"fn": "statement",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"month"
+],
+"file": "src/modules/platform/corporate/corporate.controller.ts"
+},
+{
+"m": "POST",
+"p": "/api-management/partners",
+"fn": "register",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CREATE_API_PARTNER"
+],
+"bodyDto": "RegisterPartnerDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "GET",
+"p": "/api-management/partners",
+"fn": "listPartners",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_API_USAGE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/api-management/partners/:id/approve",
+"fn": "approve",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_API_PARTNER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/api-management/partners/:id/reject",
+"fn": "reject",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_API_PARTNER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/api-management/partners/:id/suspend",
+"fn": "suspend",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"SUSPEND_API_PARTNER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/api-management/partners/:id/reactivate",
+"fn": "reactivate",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"SUSPEND_API_PARTNER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "POST",
+"p": "/api-management/partners/:id/keys",
+"fn": "generateKey",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"GENERATE_API_KEY"
+],
+"bodyDto": "GenerateKeyDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "GET",
+"p": "/api-management/partners/:id/keys",
+"fn": "listKeys",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_API_USAGE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/api-management/keys/:keyId/revoke",
+"fn": "revokeKey",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"REVOKE_API_KEY"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "POST",
+"p": "/api-management/partners/:id/webhooks",
+"fn": "registerWebhook",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_WEBHOOKS"
+],
+"bodyDto": "RegisterWebhookDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "GET",
+"p": "/api-management/partners/:id/webhooks",
+"fn": "listWebhooks",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_WEBHOOKS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "POST",
+"p": "/api-management/webhooks/:webhookId/test",
+"fn": "testWebhook",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_WEBHOOKS"
+],
+"bodyDto": "TestWebhookDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "GET",
+"p": "/api-management/webhooks/:webhookId/deliveries",
+"fn": "deliveries",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_API_USAGE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "POST",
+"p": "/api-management/versions",
+"fn": "createVersion",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_API_VERSIONS"
+],
+"bodyDto": "CreateVersionDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "GET",
+"p": "/api-management/versions",
+"fn": "listVersions",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_API_USAGE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/api-management/versions/:id/deprecate",
+"fn": "deprecate",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_API_VERSIONS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/api-management/versions/:id/retire",
+"fn": "retire",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_API_VERSIONS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/api-management/api-management.controller.ts"
+},
+{
+"m": "POST",
+"p": "/platform/reliability/jobs",
+"fn": "registerJob",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"SCHEDULE_SYSTEM_JOB"
+],
+"bodyDto": "RegisterJobDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/reliability/reliability.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform/reliability/jobs",
+"fn": "listJobs",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_BACKGROUND_JOBS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/reliability/reliability.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/platform/reliability/jobs/:id/status",
+"fn": "jobStatus",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_BACKGROUND_JOBS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/reliability/reliability.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/platform/reliability/jobs/:id/retry",
+"fn": "retryJob",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_BACKGROUND_JOBS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/reliability/reliability.controller.ts"
+},
+{
+"m": "POST",
+"p": "/platform/reliability/deployments",
+"fn": "logDeployment",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_DEPLOYMENT"
+],
+"bodyDto": "LogDeploymentDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/reliability/reliability.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform/reliability/deployments",
+"fn": "listDeployments",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_DEPLOYMENT"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/reliability/reliability.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/platform/reliability/deployments/:id/deploy",
+"fn": "deploy",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_DEPLOYMENT"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/reliability/reliability.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/platform/reliability/deployments/:id/rollback",
+"fn": "rollback",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"ROLLBACK_DEPLOYMENT"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/reliability/reliability.controller.ts"
+},
+{
+"m": "POST",
+"p": "/platform/reliability/impersonate/:userId",
+"fn": "impersonate",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"IMPERSONATE_USER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/reliability/reliability.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform/reliability/impersonations",
+"fn": "impersonations",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_PLATFORM_AUDIT_LOGS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/reliability/reliability.controller.ts"
+},
+{
+"m": "GET",
+"p": "/audit",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/platform/audit/audit.controller.ts"
+},
+{
+"m": "POST",
+"p": "/saas-billing/invoices",
+"fn": "generate",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [
+"CREATE_SAAS_INVOICE"
+],
+"bodyDto": "GenerateInvoiceDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/saas-billing/saas-billing.controller.ts"
+},
+{
+"m": "GET",
+"p": "/saas-billing/invoices",
+"fn": "list",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [
+"VIEW_SAAS_LEDGER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/platform/saas-billing/saas-billing.controller.ts"
+},
+{
+"m": "GET",
+"p": "/saas-billing/invoices/:id",
+"fn": "get",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [
+"VIEW_SAAS_LEDGER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/saas-billing/saas-billing.controller.ts"
+},
+{
+"m": "GET",
+"p": "/saas-billing/invoices/:id/notes",
+"fn": "notes",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [
+"VIEW_SAAS_LEDGER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/saas-billing/saas-billing.controller.ts"
+},
+{
+"m": "POST",
+"p": "/saas-billing/invoices/:id/void",
+"fn": "voidInvoice",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [
+"VOID_SAAS_INVOICE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/saas-billing/saas-billing.controller.ts"
+},
+{
+"m": "POST",
+"p": "/saas-billing/invoices/:id/payments",
+"fn": "pay",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [
+"RECORD_SAAS_PAYMENT"
+],
+"bodyDto": "RecordPaymentDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/saas-billing/saas-billing.controller.ts"
+},
+{
+"m": "POST",
+"p": "/saas-billing/invoices/:id/credit-notes",
+"fn": "credit",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [
+"CREATE_SAAS_CREDIT_NOTE"
+],
+"bodyDto": "NoteDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/saas-billing/saas-billing.controller.ts"
+},
+{
+"m": "POST",
+"p": "/saas-billing/invoices/:id/debit-notes",
+"fn": "debit",
+"roles": [
+"SUPERADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [
+"CREATE_SAAS_DEBIT_NOTE"
+],
+"bodyDto": "NoteDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/saas-billing/saas-billing.controller.ts"
+},
+{
+"m": "GET",
+"p": "/appearance",
+"fn": "get",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/appearance.controller.ts"
+},
+{
+"m": "PUT",
+"p": "/appearance",
+"fn": "update",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_PLATFORM_SETTINGS"
+],
+"bodyDto": "BulkSetSettingsDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/appearance.controller.ts"
+},
+{
+"m": "POST",
+"p": "/appearance/reset",
+"fn": "reset",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_PLATFORM_SETTINGS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/appearance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/appearance/versions",
+"fn": "versions",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_CONFIG_VERSIONS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/appearance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform-config/settings",
+"fn": "all",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_CONFIG_VERSIONS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform-config/settings/:namespace",
+"fn": "byNamespace",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_CONFIG_VERSIONS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "POST",
+"p": "/platform-config/settings",
+"fn": "set",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_PLATFORM_SETTINGS"
+],
+"bodyDto": "SetSettingDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "PUT",
+"p": "/platform-config/settings/:namespace",
+"fn": "setBulk",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_PLATFORM_SETTINGS"
+],
+"bodyDto": "BulkSetSettingsDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "POST",
+"p": "/platform-config/settings/:namespace/reset",
+"fn": "resetNamespace",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_PLATFORM_SETTINGS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform-config/effective/:namespace",
+"fn": "effectiveNamespace",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_CONFIG_VERSIONS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform-config/effective/:namespace/:key",
+"fn": "effectiveValue",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_CONFIG_VERSIONS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform-config/flags",
+"fn": "flags",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_FEATURE_FLAGS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "POST",
+"p": "/platform-config/flags",
+"fn": "upsertFlag",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_FEATURE_FLAGS"
+],
+"bodyDto": "UpsertFlagDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "POST",
+"p": "/platform-config/flags/:key/override",
+"fn": "override",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_FEATURE_FLAGS"
+],
+"bodyDto": "OperatorOverrideDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/platform-config/flags/:key/override/:operatorId",
+"fn": "clearOverride",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_FEATURE_FLAGS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform-config/flags/:key/evaluate",
+"fn": "evaluate",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_FEATURE_FLAGS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform-config/versions/compare",
+"fn": "compare",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_CONFIG_VERSIONS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"a",
+"b"
+],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "GET",
+"p": "/platform-config/versions/:namespace",
+"fn": "versions",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_CONFIG_VERSIONS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "POST",
+"p": "/platform-config/versions/:id/restore",
+"fn": "restore",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"RESTORE_CONFIG_VERSION"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/platform-config/platform-config.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/notifications",
+"fn": "myPrefs",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/notification-settings/notification-settings.controller.ts"
+},
+{
+"m": "PUT",
+"p": "/operator/notifications",
+"fn": "setPref",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "SetOperatorPrefDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/notification-settings/notification-settings.controller.ts"
+},
+{
+"m": "GET",
+"p": "/analytics/operator",
+"fn": "operator",
+"roles": [
+"OPERATOR_ADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/platform/analytics/analytics.controller.ts"
+},
+{
+"m": "GET",
+"p": "/analytics/platform",
+"fn": "platform",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/platform/analytics/analytics.controller.ts"
+},
+{
+"m": "POST",
+"p": "/trips/:id/assign-driver",
+"fn": "assignDriver",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "AssignDriverDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/trips/trips.controller.ts"
+},
+{
+"m": "POST",
+"p": "/trips",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateTripDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/trips/trips.controller.ts"
+},
+{
+"m": "GET",
+"p": "/trips/search",
+"fn": "search",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": "SearchTripDto",
+"queryKeys": [],
+"file": "src/modules/operator/trips/trips.controller.ts"
+},
+{
+"m": "GET",
+"p": "/trips/:id/seat-map",
+"fn": "seatMap",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": "SeatAvailabilityDto",
+"queryKeys": [],
+"file": "src/modules/operator/trips/trips.controller.ts"
+},
+{
+"m": "GET",
+"p": "/trips/:id/seats",
+"fn": "seats",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": "SeatAvailabilityDto",
+"queryKeys": [],
+"file": "src/modules/operator/trips/trips.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/trips/:id/complete",
+"fn": "complete",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/trips/trips.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/trips/:id/cancel",
+"fn": "cancel",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/trips/trips.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/forecasting",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"GENERATE_FORECAST"
+],
+"bodyDto": "CreateForecastDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/forecasting/forecasting.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/forecasting",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_FORECAST_DASHBOARD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/forecasting/forecasting.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/driver-compliance/documents",
+"fn": "addDocument",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"UPLOAD_DRIVER_DOCUMENTS"
+],
+"bodyDto": "AddDocumentDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/driver-compliance/driver-compliance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/driver-compliance/drivers/:driverId/documents",
+"fn": "documents",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_DRIVER_COMPLIANCE_DASHBOARD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/driver-compliance/driver-compliance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/driver-compliance/expiring",
+"fn": "expiring",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_EXPIRING_DOCS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"warningDays"
+],
+"file": "src/modules/operator/driver-compliance/driver-compliance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/driver-compliance/drivers/:driverId/status",
+"fn": "status",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_DRIVER_COMPLIANCE_DASHBOARD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/driver-compliance/driver-compliance.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/driver-compliance/violations",
+"fn": "recordViolation",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"RECORD_DRIVER_VIOLATION"
+],
+"bodyDto": "ViolationDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/driver-compliance/driver-compliance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/driver-compliance/drivers/:driverId/violations",
+"fn": "violations",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_DRIVER_COMPLIANCE_DASHBOARD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/driver-compliance/driver-compliance.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/driver-compliance/training",
+"fn": "recordTraining",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"ASSIGN_DRIVER_TRAINING"
+],
+"bodyDto": "TrainingDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/driver-compliance/driver-compliance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/driver-compliance/drivers/:driverId/training",
+"fn": "training",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_DRIVER_COMPLIANCE_DASHBOARD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/driver-compliance/driver-compliance.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/hubs",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_HUB"
+],
+"bodyDto": "CreateHubDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/hub/hub.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/hubs",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_HUB"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/hub/hub.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/hubs/:hubId/routes",
+"fn": "attach",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_HUB_ROUTE"
+],
+"bodyDto": "AttachRouteDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/hub/hub.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/hubs/:hubId/routes",
+"fn": "spokes",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_HUB"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/hub/hub.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/operator/hubs/routes/:id",
+"fn": "detach",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_HUB_ROUTE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/hub/hub.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/finance/journal",
+"fn": "post",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CREATE_INVOICE"
+],
+"bodyDto": "PostJournalDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/finance/finance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/finance/journal",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_LEDGER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"period"
+],
+"file": "src/modules/operator/finance/finance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/finance/trial-balance",
+"fn": "trialBalance",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_LEDGER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"period"
+],
+"file": "src/modules/operator/finance/finance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/finance/periods",
+"fn": "periods",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_FINANCIAL_DASHBOARD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/finance/finance.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/finance/periods/:period/close",
+"fn": "close",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CLOSE_FINANCIAL_PERIOD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/finance/finance.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/finance/periods/:period/reopen",
+"fn": "reopen",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CLOSE_FINANCIAL_PERIOD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/finance/finance.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operators/apply",
+"fn": "apply",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "CreateLeadDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operators/leads",
+"fn": "leads",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operators/leads/:id",
+"fn": "lead",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operators/leads/:id/contacted",
+"fn": "contacted",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operators/leads/:id/verify",
+"fn": "verify",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operators/leads/:id/approve",
+"fn": "approve",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "ApproveDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operators/leads/:id/reject",
+"fn": "reject",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "RejectDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operators",
+"fn": "list",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operators/:id",
+"fn": "get",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operators/:id/commission",
+"fn": "commission",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CommissionDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operators/:id/suspend",
+"fn": "suspend",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "RejectDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operators/:id/activate",
+"fn": "activate",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operators/branding/me",
+"fn": "setBranding",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "BrandingDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operators/:id/branding",
+"fn": "getBranding",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/operators/operators.controller.ts"
+},
+{
+"m": "GET",
+"p": "/gps/config",
+"fn": "getConfig",
+"roles": [
+"OPERATOR_ADMIN",
+"DEPOT_MANAGER"
+],
+"public": false,
+"perm": [
+"CONFIGURE_GPS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/gps/gps.controller.ts"
+},
+{
+"m": "PUT",
+"p": "/gps/config",
+"fn": "saveConfig",
+"roles": [
+"OPERATOR_ADMIN",
+"DEPOT_MANAGER"
+],
+"public": false,
+"perm": [
+"CONFIGURE_GPS"
+],
+"bodyDto": "SaveGpsConfigDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/gps/gps.controller.ts"
+},
+{
+"m": "POST",
+"p": "/gps/config/test",
+"fn": "test",
+"roles": [
+"OPERATOR_ADMIN",
+"DEPOT_MANAGER"
+],
+"public": false,
+"perm": [
+"CONFIGURE_GPS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/gps/gps.controller.ts"
+},
+{
+"m": "GET",
+"p": "/gps/devices",
+"fn": "devices",
+"roles": [
+"OPERATOR_ADMIN",
+"DEPOT_MANAGER"
+],
+"public": false,
+"perm": [
+"MAP_GPS_DEVICE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/gps/gps.controller.ts"
+},
+{
+"m": "POST",
+"p": "/gps/devices",
+"fn": "map",
+"roles": [
+"OPERATOR_ADMIN",
+"DEPOT_MANAGER"
+],
+"public": false,
+"perm": [
+"MAP_GPS_DEVICE"
+],
+"bodyDto": "MapDeviceDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/gps/gps.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/gps/devices/:id",
+"fn": "unmap",
+"roles": [
+"OPERATOR_ADMIN",
+"DEPOT_MANAGER"
+],
+"public": false,
+"perm": [
+"MAP_GPS_DEVICE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/gps/gps.controller.ts"
+},
+{
+"m": "POST",
+"p": "/gps/tracking/:bookingId",
+"fn": "track",
+"roles": [
+"OPERATOR_ADMIN",
+"DEPOT_MANAGER"
+],
+"public": false,
+"perm": [
+"VIEW_LIVE_TRACKING"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/gps/gps.controller.ts"
+},
+{
+"m": "GET",
+"p": "/track/:token",
+"fn": "track",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/gps/gps-tracking.controller.ts"
+},
+{
+"m": "GET",
+"p": "/gps/providers",
+"fn": "list",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_GPS_PROVIDER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/gps/gps-provider.controller.ts"
+},
+{
+"m": "PUT",
+"p": "/gps/providers",
+"fn": "setStatus",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_GPS_PROVIDER"
+],
+"bodyDto": "SetProviderStatusDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/gps/gps-provider.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operators/:id/scorecard",
+"fn": "scorecard_",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/scorecard/scorecard.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operators/scorecards/leaderboard",
+"fn": "leaderboard",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/scorecard/scorecard.controller.ts"
+},
+{
+"m": "POST",
+"p": "/buses",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateBusDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "GET",
+"p": "/buses",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "PUT",
+"p": "/buses/:id/seat-fares",
+"fn": "setSeatFares",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_DYNAMIC_PRICING"
+],
+"bodyDto": "SetSeatFaresDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/buses/:id/seat-fares/adjust",
+"fn": "adjustSeatFares",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CONFIGURE_DYNAMIC_PRICING"
+],
+"bodyDto": "AdjustSeatFaresDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/buses/:id/route",
+"fn": "mapRoute",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "MapRouteDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/buses/:id",
+"fn": "update",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "UpdateBusDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/buses/:id/deactivate",
+"fn": "deactivate",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/buses/:id/activate",
+"fn": "activate",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/buses/:id/ladies-reserved",
+"fn": "configureLadiesReserved",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "LadiesReservedDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/buses/:id/seat-adjacency",
+"fn": "setSeatAdjacency",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "SeatAdjacencyDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "GET",
+"p": "/buses/:id/seat-config",
+"fn": "getSeatConfig",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/buses/:id",
+"fn": "remove",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/buses/buses.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/fuel/transactions",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CREATE_FUEL_TXN"
+],
+"bodyDto": "FuelTxnDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fuel/fuel.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/fuel/transactions",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_FUEL_REPORTS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fuel/fuel.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/fuel/transactions/:id/approve",
+"fn": "approve",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_FUEL_TXN"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fuel/fuel.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/fuel/buses/:busId/efficiency",
+"fn": "efficiency",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_FUEL_REPORTS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"benchmark"
+],
+"file": "src/modules/operator/fuel/fuel.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/fuel/cards",
+"fn": "createCard",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_FUEL_CARD"
+],
+"bodyDto": "FuelCardDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fuel/fuel.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/fuel/cards",
+"fn": "listCards",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_FUEL_CARD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fuel/fuel.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/fuel/cards/:id/suspend",
+"fn": "suspendCard",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_FUEL_CARD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fuel/fuel.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/disruption",
+"fn": "declare",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CREATE_DISRUPTION"
+],
+"bodyDto": "DeclareDisruptionDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/disruption/disruption.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/disruption",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_DISRUPTION_DASHBOARD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/disruption/disruption.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/disruption/:id/divert",
+"fn": "divert",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"DIVERT_ROUTE"
+],
+"bodyDto": "DivertDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/disruption/disruption.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/disruption/:id/backup",
+"fn": "backup",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"DEPLOY_BACKUP"
+],
+"bodyDto": "BackupDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/disruption/disruption.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/disruption/:id/resolve",
+"fn": "resolve",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CLOSE_DISRUPTION"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/disruption/disruption.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/disruption/:id/close",
+"fn": "close",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CLOSE_DISRUPTION"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/disruption/disruption.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/disruption/:id/rca",
+"fn": "rca",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"RECORD_RCA"
+],
+"bodyDto": "RcaDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/disruption/disruption.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/support/tickets",
+"fn": "createTicket",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"CREATE_SUPPORT_TICKET"
+],
+"bodyDto": "CreateTicketDto",
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/support/tickets",
+"fn": "listTickets",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"VIEW_SUPPORT_TICKETS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/support/tickets/:id/assign",
+"fn": "assign",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"ASSIGN_SUPPORT_TICKET"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/support/tickets/:id/escalate",
+"fn": "escalate",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"ASSIGN_SUPPORT_TICKET"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/support/tickets/:id/resolve",
+"fn": "resolve",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"CLOSE_SUPPORT_TICKET"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/support/tickets/:id/close",
+"fn": "close",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"CLOSE_SUPPORT_TICKET"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/support/complaints",
+"fn": "createComplaint",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"CREATE_COMPLAINT"
+],
+"bodyDto": "CreateComplaintDto",
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/support/complaints",
+"fn": "listComplaints",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"VIEW_SUPPORT_DASHBOARD"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/support/complaints/:id/resolve",
+"fn": "resolveComplaint",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"RESOLVE_COMPLAINT"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/support/complaints/:id/reopen",
+"fn": "reopenComplaint",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"RESOLVE_COMPLAINT"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/support/lost-found",
+"fn": "createLostFound",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"MANAGE_LOST_FOUND"
+],
+"bodyDto": "LostFoundDto",
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/support/lost-found",
+"fn": "listLostFound",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"MANAGE_LOST_FOUND"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/support/lost-found/:id/close",
+"fn": "closeLostFound",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"MANAGE_LOST_FOUND"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/support/blacklist",
+"fn": "blacklist",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"BLACKLIST_PASSENGER"
+],
+"bodyDto": "BlacklistDto",
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/support/blacklist",
+"fn": "listBlacklist",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT",
+"PLATFORM_SUPPORT"
+],
+"public": false,
+"perm": [
+"VIEW_CUSTOMER_TIMELINE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/operator/support-crm/support-crm.controller.ts"
+},
+{
+"m": "POST",
+"p": "/drivers",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateDriverDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/drivers/drivers.controller.ts"
+},
+{
+"m": "GET",
+"p": "/drivers",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/drivers/drivers.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/drivers/:id/assign",
+"fn": "assign",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "AssignBusDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/drivers/drivers.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/drivers/:id/unassign",
+"fn": "unassign",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/drivers/drivers.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/drivers/:id",
+"fn": "update",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "UpdateDriverDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/drivers/drivers.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/drivers/:id",
+"fn": "remove",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/drivers/drivers.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/daily-statement/run",
+"fn": "run",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "RunStatementDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/daily-statement/daily-statement.controller.ts"
+},
+{
+"m": "GET",
+"p": "/seat-layouts/catalogue",
+"fn": "catalogue",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/seat-layouts/seat-layouts.controller.ts"
+},
+{
+"m": "GET",
+"p": "/seat-layouts",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_BUS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/seat-layouts/seat-layouts.controller.ts"
+},
+{
+"m": "GET",
+"p": "/seat-layouts/:id",
+"fn": "get",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_BUS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/seat-layouts/seat-layouts.controller.ts"
+},
+{
+"m": "GET",
+"p": "/seat-layouts/family/:familyId/versions",
+"fn": "versions",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_BUS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/seat-layouts/seat-layouts.controller.ts"
+},
+{
+"m": "POST",
+"p": "/seat-layouts",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CREATE_BUS"
+],
+"bodyDto": "CreateLayoutDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/seat-layouts/seat-layouts.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/seat-layouts/:id",
+"fn": "update",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"EDIT_BUS"
+],
+"bodyDto": "UpdateLayoutDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/seat-layouts/seat-layouts.controller.ts"
+},
+{
+"m": "POST",
+"p": "/seat-layouts/:id/validate",
+"fn": "validate",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_BUS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/seat-layouts/seat-layouts.controller.ts"
+},
+{
+"m": "POST",
+"p": "/seat-layouts/:id/publish",
+"fn": "publish",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"EDIT_BUS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/seat-layouts/seat-layouts.controller.ts"
+},
+{
+"m": "POST",
+"p": "/seat-layouts/:id/clone",
+"fn": "clone",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CREATE_BUS"
+],
+"bodyDto": "CloneLayoutDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/seat-layouts/seat-layouts.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/seat-layouts/:id",
+"fn": "archive",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"EDIT_BUS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/seat-layouts/seat-layouts.controller.ts"
+},
+{
+"m": "POST",
+"p": "/seat-layouts/assign/:busId",
+"fn": "assign",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"EDIT_BUS"
+],
+"bodyDto": "AssignLayoutDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/seat-layouts/seat-layouts.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/schedules",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CREATE_SCHEDULE"
+],
+"bodyDto": "CreateScheduleDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/schedule/schedule.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/schedules",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_SCHEDULE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/schedule/schedule.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/schedules/:id/activate",
+"fn": "activate",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"ACTIVATE_SCHEDULE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/schedule/schedule.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/schedules/:id/suspend",
+"fn": "suspend",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"ACTIVATE_SCHEDULE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/schedule/schedule.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/schedules/:id/preview",
+"fn": "preview",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_SCHEDULE"
+],
+"bodyDto": "GenerateTripsDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/schedule/schedule.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/schedules/:id/generate",
+"fn": "generate",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CREATE_TRIP"
+],
+"bodyDto": "GenerateTripsDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/schedule/schedule.controller.ts"
+},
+{
+"m": "GET",
+"p": "/maintenance/current",
+"fn": "current",
+"roles": [],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/maintenance/maintenance.controller.ts"
+},
+{
+"m": "GET",
+"p": "/maintenance",
+"fn": "list",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/maintenance/maintenance.controller.ts"
+},
+{
+"m": "POST",
+"p": "/maintenance",
+"fn": "create",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateMaintenanceDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/maintenance/maintenance.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/maintenance/:id",
+"fn": "cancel",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/maintenance/maintenance.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/counters",
+"fn": "createCounter",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_COUNTER"
+],
+"bodyDto": "CreateCounterDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/counter/counter.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/counters",
+"fn": "listCounters",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [
+"VIEW_COUNTER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/counter/counter.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/counters/agents",
+"fn": "createAgent",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_COUNTER"
+],
+"bodyDto": "CreateAgentDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/counter/counter.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/counters/agents",
+"fn": "listAgents",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [
+"VIEW_COUNTER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/counter/counter.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/counters/sale",
+"fn": "recordSale",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [
+"COUNTER_SALE"
+],
+"bodyDto": "RecordSaleDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/counter/counter.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/counters/:id/closing",
+"fn": "closing",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [
+"VIEW_COUNTER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"date"
+],
+"file": "src/modules/operator/counter/counter.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/crew/employees",
+"fn": "createEmployee",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CREATE_EMPLOYEE"
+],
+"bodyDto": "CreateEmployeeDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/crew-hr/crew-hr.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/crew/employees",
+"fn": "listEmployees",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CREATE_EMPLOYEE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/crew-hr/crew-hr.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/crew/shifts",
+"fn": "createShift",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_SHIFT"
+],
+"bodyDto": "CreateShiftDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/crew-hr/crew-hr.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/crew/shifts",
+"fn": "listShifts",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_DUTY_ROSTER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/crew-hr/crew-hr.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/crew/attendance",
+"fn": "recordAttendance",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_ATTENDANCE"
+],
+"bodyDto": "CheckInDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/crew-hr/crew-hr.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/crew/attendance",
+"fn": "listAttendance",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_ATTENDANCE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/crew-hr/crew-hr.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/crew/leave",
+"fn": "requestLeave",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_LEAVE"
+],
+"bodyDto": "LeaveDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/crew-hr/crew-hr.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/crew/leave",
+"fn": "listLeave",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_LEAVE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/crew-hr/crew-hr.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/crew/leave/:id/approve",
+"fn": "approveLeave",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_LEAVE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/crew-hr/crew-hr.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/crew/leave/:id/reject",
+"fn": "rejectLeave",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_LEAVE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/crew-hr/crew-hr.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/fleet/work-orders",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"CREATE_WORK_ORDER"
+],
+"bodyDto": "CreateWorkOrderDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fleet/fleet.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/fleet/work-orders",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_VEHICLE_HEALTH"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fleet/fleet.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/fleet/work-orders/:id/start",
+"fn": "start",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_WORK_ORDER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fleet/fleet.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/fleet/work-orders/:id/close",
+"fn": "close",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_WORK_ORDER"
+],
+"bodyDto": "CloseWorkOrderDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fleet/fleet.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/operator/fleet/work-orders/:id/cancel",
+"fn": "cancel",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_WORK_ORDER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fleet/fleet.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/fleet/vehicle-documents",
+"fn": "addDoc",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_VEHICLE_DOCS"
+],
+"bodyDto": "VehicleDocDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fleet/fleet.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/fleet/vehicle-documents/expiring",
+"fn": "expiringDocs",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_VEHICLE_DOCS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"warningDays"
+],
+"file": "src/modules/operator/fleet/fleet.controller.ts"
+},
+{
+"m": "POST",
+"p": "/operator/fleet/parts",
+"fn": "upsertPart",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_PARTS_INVENTORY"
+],
+"bodyDto": "PartDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fleet/fleet.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/fleet/parts",
+"fn": "listParts",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_PARTS_INVENTORY"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/fleet/fleet.controller.ts"
+},
+{
+"m": "GET",
+"p": "/operator/dashboard",
+"fn": "overview",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"from",
+"to"
+],
+"file": "src/modules/operator/dashboard/dashboard.controller.ts"
+},
+{
+"m": "POST",
+"p": "/stops",
+"fn": "create",
+"roles": [
+"SUPERADMIN",
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateStopDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/stops/stops.controller.ts"
+},
+{
+"m": "GET",
+"p": "/stops",
+"fn": "all",
+"roles": [],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/stops/stops.controller.ts"
+},
+{
+"m": "POST",
+"p": "/routes",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateRouteDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/routes/routes.controller.ts"
+},
+{
+"m": "GET",
+"p": "/routes",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/routes/routes.controller.ts"
+},
+{
+"m": "GET",
+"p": "/routes/:id",
+"fn": "get",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/routes/routes.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/routes/:id",
+"fn": "update",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "UpdateRouteDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/routes/routes.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/routes/:id",
+"fn": "remove",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/operator/routes/routes.controller.ts"
+},
+{
+"m": "POST",
+"p": "/booking/seat-upgrade/offers",
+"fn": "offer",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"OFFER_SEAT_UPGRADE"
+],
+"bodyDto": "OfferUpgradeDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/seat-upgrade/seat-upgrade.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/booking/seat-upgrade/offers/:id/apply",
+"fn": "apply",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_SEAT_UPGRADE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/seat-upgrade/seat-upgrade.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/booking/seat-upgrade/offers/:id/reject",
+"fn": "reject",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_SEAT_UPGRADE"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/seat-upgrade/seat-upgrade.controller.ts"
+},
+{
+"m": "GET",
+"p": "/booking/seat-upgrade/bookings/:bookingId/offers",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_UPGRADE_REPORTS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/seat-upgrade/seat-upgrade.controller.ts"
+},
+{
+"m": "POST",
+"p": "/reviews",
+"fn": "create",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateReviewDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/reviews/reviews.controller.ts"
+},
+{
+"m": "GET",
+"p": "/reviews/operator/:operatorId",
+"fn": "list",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/reviews/reviews.controller.ts"
+},
+{
+"m": "GET",
+"p": "/reviews/operator/:operatorId/rating",
+"fn": "rating",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/reviews/reviews.controller.ts"
+},
+{
+"m": "GET",
+"p": "/booking/boarding/trip/:tripId",
+"fn": "list",
+"roles": [
+"DRIVER",
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_BOARDING_LIST"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/boarding/boarding.controller.ts"
+},
+{
+"m": "POST",
+"p": "/booking/boarding/scan",
+"fn": "scan",
+"roles": [
+"DRIVER",
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"SCAN_QR"
+],
+"bodyDto": "ScanDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/boarding/boarding.controller.ts"
+},
+{
+"m": "POST",
+"p": "/booking/boarding/manual",
+"fn": "manual",
+"roles": [
+"DRIVER",
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MARK_BOARDED"
+],
+"bodyDto": "ManualBoardDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/boarding/boarding.controller.ts"
+},
+{
+"m": "POST",
+"p": "/booking/boarding/no-show",
+"fn": "noShow",
+"roles": [
+"DRIVER",
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"MARK_NO_SHOW"
+],
+"bodyDto": "ManualBoardDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/boarding/boarding.controller.ts"
+},
+{
+"m": "GET",
+"p": "/booking/journeys/search",
+"fn": "search",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": "JourneySearchDto",
+"queryKeys": [],
+"file": "src/modules/booking/journey-search/journey-search.controller.ts"
+},
+{
+"m": "POST",
+"p": "/booking/transfer",
+"fn": "initiate",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"INITIATE_PASSENGER_TRANSFER"
+],
+"bodyDto": "InitiateTransferDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/passenger-transfer/passenger-transfer.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/booking/transfer/:id/approve",
+"fn": "approve",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"APPROVE_PASSENGER_TRANSFER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/passenger-transfer/passenger-transfer.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/booking/transfer/:id/execute",
+"fn": "execute",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"REGENERATE_TICKET"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/passenger-transfer/passenger-transfer.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/booking/transfer/:id/cancel",
+"fn": "cancel",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"INITIATE_PASSENGER_TRANSFER"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/passenger-transfer/passenger-transfer.controller.ts"
+},
+{
+"m": "GET",
+"p": "/booking/transfer/bookings/:bookingId",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_TRANSFER_REPORTS"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/passenger-transfer/passenger-transfer.controller.ts"
+},
+{
+"m": "POST",
+"p": "/bookings/hold",
+"fn": "hold",
+"roles": [
+"CUSTOMER",
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [],
+"bodyDto": "HoldDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/bookings/bookings.controller.ts"
+},
+{
+"m": "POST",
+"p": "/bookings",
+"fn": "create",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateBookingDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/bookings/bookings.controller.ts"
+},
+{
+"m": "GET",
+"p": "/bookings/my",
+"fn": "my",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/bookings/bookings.controller.ts"
+},
+{
+"m": "GET",
+"p": "/bookings/:id/detail",
+"fn": "detail",
+"roles": [
+"CUSTOMER",
+"OPERATOR_ADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT",
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/bookings/bookings.controller.ts"
+},
+{
+"m": "GET",
+"p": "/bookings",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/booking/bookings/bookings.controller.ts"
+},
+{
+"m": "GET",
+"p": "/bookings/pnr/:pnr",
+"fn": "byPnr",
+"roles": [
+"CUSTOMER",
+"OPERATOR_ADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT",
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/bookings/bookings.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/bookings/:id/cancel",
+"fn": "cancel",
+"roles": [
+"CUSTOMER",
+"OPERATOR_ADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT",
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CancelBookingDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/bookings/bookings.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/bookings/:id/cancel-seats",
+"fn": "cancelSeats",
+"roles": [
+"CUSTOMER",
+"OPERATOR_ADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT",
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "PartialCancelDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/bookings/bookings.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/bookings/:id/reschedule",
+"fn": "reschedule",
+"roles": [
+"CUSTOMER",
+"PLATFORM_SUPPORT",
+"SUPPORT"
+],
+"public": false,
+"perm": [],
+"bodyDto": "RescheduleDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/bookings/bookings.controller.ts"
+},
+{
+"m": "GET",
+"p": "/bookings/:id/ticket.pdf",
+"fn": "ticket",
+"roles": [
+"CUSTOMER",
+"OPERATOR_ADMIN",
+"PLATFORM_SUPPORT",
+"SUPPORT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/bookings/bookings.controller.ts"
+},
+{
+"m": "POST",
+"p": "/trips/:id/seat-alert",
+"fn": "watch",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "CreateSeatAlertDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/booking/seat-alert/seat-alert.controller.ts"
+},
+{
+"m": "GET",
+"p": "/settlements/preview",
+"fn": "preview",
+"roles": [
+"OPERATOR_ADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": "PeriodQueryDto",
+"queryKeys": [],
+"file": "src/modules/finance/settlements/settlements.controller.ts"
+},
+{
+"m": "GET",
+"p": "/settlements",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/finance/settlements/settlements.controller.ts"
+},
+{
+"m": "POST",
+"p": "/settlements/:operatorId",
+"fn": "create",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "PeriodDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/finance/settlements/settlements.controller.ts"
+},
+{
+"m": "PATCH",
+"p": "/settlements/:id/paid",
+"fn": "paid",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/finance/settlements/settlements.controller.ts"
+},
+{
+"m": "POST",
+"p": "/trips/:id/fare-freeze",
+"fn": "freeze",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "FreezeFareDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/finance/fare-freeze/fare-freeze.controller.ts"
+},
+{
+"m": "GET",
+"p": "/finance/summary",
+"fn": "operator",
+"roles": [
+"OPERATOR_ADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId",
+"from",
+"to"
+],
+"file": "src/modules/finance/summary/summary.controller.ts"
+},
+{
+"m": "GET",
+"p": "/billing/invoices",
+"fn": "invoices",
+"roles": [
+"OPERATOR_ADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/finance/billing/billing.controller.ts"
+},
+{
+"m": "GET",
+"p": "/billing/commission",
+"fn": "commission",
+"roles": [
+"OPERATOR_ADMIN",
+"ACCOUNTANT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/finance/billing/billing.controller.ts"
+},
+{
+"m": "GET",
+"p": "/billing/platform/commission",
+"fn": "platform",
+"roles": [
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/finance/billing/billing.controller.ts"
+},
+{
+"m": "POST",
+"p": "/coupons",
+"fn": "create",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"MANAGE_COUPON"
+],
+"bodyDto": "CreateCouponDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/finance/coupons/coupons.controller.ts"
+},
+{
+"m": "GET",
+"p": "/coupons",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPERADMIN"
+],
+"public": false,
+"perm": [
+"VIEW_COUPON"
+],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/finance/coupons/coupons.controller.ts"
+},
+{
+"m": "POST",
+"p": "/coupons/validate",
+"fn": "validate",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "ValidateCouponDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/finance/coupons/coupons.controller.ts"
+},
+{
+"m": "POST",
+"p": "/payments/razorpay/order",
+"fn": "createOrder",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "CreateOrderDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/finance/payments/payments.controller.ts"
+},
+{
+"m": "POST",
+"p": "/payments/razorpay/verify",
+"fn": "verify",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": "VerifyPaymentDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/finance/payments/payments.controller.ts"
+},
+{
+"m": "GET",
+"p": "/pricing/trips/:id",
+"fn": "preview",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/finance/pricing/pricing.controller.ts"
+},
+{
+"m": "POST",
+"p": "/ota/v1/search",
+"fn": "search",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "OtaSearchDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/integrations/ota/ota.controller.ts"
+},
+{
+"m": "GET",
+"p": "/ota/v1/trips/:id/seat-map",
+"fn": "seatMap",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"boardingStopId",
+"droppingStopId"
+],
+"file": "src/modules/integrations/ota/ota.controller.ts"
+},
+{
+"m": "POST",
+"p": "/ota/v1/block",
+"fn": "block",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "OtaBlockDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/integrations/ota/ota.controller.ts"
+},
+{
+"m": "POST",
+"p": "/ota/v1/confirm",
+"fn": "confirm",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "OtaConfirmDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/integrations/ota/ota.controller.ts"
+},
+{
+"m": "GET",
+"p": "/ota/v1/status/:pnr",
+"fn": "status",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/integrations/ota/ota.controller.ts"
+},
+{
+"m": "POST",
+"p": "/ota/v1/cancel",
+"fn": "cancel",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "OtaCancelDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/integrations/ota/ota.controller.ts"
+},
+{
+"m": "POST",
+"p": "/channels",
+"fn": "register",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "RegisterChannelDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/integrations/channels/channels.controller.ts"
+},
+{
+"m": "GET",
+"p": "/channels",
+"fn": "list",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/integrations/channels/channels.controller.ts"
+},
+{
+"m": "GET",
+"p": "/channels/inventory/:tripId",
+"fn": "inventory",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/integrations/channels/channels.controller.ts"
+},
+{
+"m": "GET",
+"p": "/notifications/mine",
+"fn": "mine",
+"roles": [
+"CUSTOMER"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/integrations/notifications/notifications.controller.ts"
+},
+{
+"m": "GET",
+"p": "/notifications/log",
+"fn": "log",
+"roles": [
+"OPERATOR_ADMIN",
+"SUPPORT"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/integrations/notifications/notifications.controller.ts"
+},
+{
+"m": "GET",
+"p": "/notifications/stats",
+"fn": "stats",
+"roles": [
+"OPERATOR_ADMIN",
+"ACCOUNTANT",
+"SUPERADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [
+"operatorId"
+],
+"file": "src/modules/integrations/notifications/notifications.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/register",
+"fn": "register",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "RegisterDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/verify-email",
+"fn": "verifyEmail",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "VerifyEmailDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/login",
+"fn": "login",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "LoginDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "GET",
+"p": "/auth/me",
+"fn": "me",
+"roles": [],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/refresh",
+"fn": "refresh",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "RefreshDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/logout",
+"fn": "logout",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "LogoutDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/logout-all",
+"fn": "logoutAll",
+"roles": [],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/set-password",
+"fn": "setPassword",
+"roles": [],
+"public": false,
+"perm": [],
+"bodyDto": "SetPasswordDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/change-password",
+"fn": "changePassword",
+"roles": [],
+"public": false,
+"perm": [],
+"bodyDto": "ChangePasswordDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/forgot-password",
+"fn": "forgot",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "ForgotPasswordDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/reset-password",
+"fn": "reset",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "ResetPasswordDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/forgot-password-otp",
+"fn": "forgotOtp",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "ForgotPasswordOtpDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/reset-password-otp",
+"fn": "resetOtp",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "ResetPasswordOtpDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/change-email/request",
+"fn": "requestEmailChange",
+"roles": [],
+"public": false,
+"perm": [],
+"bodyDto": "ChangeEmailRequestDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/change-email/confirm",
+"fn": "confirmEmailChange",
+"roles": [],
+"public": false,
+"perm": [],
+"bodyDto": "ConfirmOtpDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/change-phone/request",
+"fn": "requestPhoneChange",
+"roles": [],
+"public": false,
+"perm": [],
+"bodyDto": "ChangePhoneRequestDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/change-phone/confirm",
+"fn": "confirmPhoneChange",
+"roles": [],
+"public": false,
+"perm": [],
+"bodyDto": "ConfirmOtpDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "POST",
+"p": "/auth/resend-verification",
+"fn": "resend",
+"roles": [],
+"public": true,
+"perm": [],
+"bodyDto": "ResendVerificationDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/modules/system/auth/auth.controller.ts"
+},
+{
+"m": "GET",
+"p": "/rbac/catalog",
+"fn": "catalog",
+"roles": [
+"SUPERADMIN",
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/common/rbac/rbac.controller.ts"
+},
+{
+"m": "GET",
+"p": "/rbac/me",
+"fn": "me",
+"roles": [],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/common/rbac/rbac.controller.ts"
+},
+{
+"m": "GET",
+"p": "/rbac/overrides",
+"fn": "overrides",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": null,
+"queryKeys": [],
+"file": "src/common/rbac/rbac.controller.ts"
+},
+{
+"m": "POST",
+"p": "/rbac/overrides",
+"fn": "setOverride",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": "SetOverrideDto",
+"queryDto": null,
+"queryKeys": [],
+"file": "src/common/rbac/rbac.controller.ts"
+},
+{
+"m": "DELETE",
+"p": "/rbac/overrides",
+"fn": "clearOverride",
+"roles": [
+"OPERATOR_ADMIN"
+],
+"public": false,
+"perm": [],
+"bodyDto": null,
+"queryDto": "ClearOverrideQueryDto",
+"queryKeys": [],
+"file": "src/common/rbac/rbac.controller.ts"
+}
+]
