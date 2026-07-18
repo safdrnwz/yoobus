@@ -29,6 +29,7 @@ export class Trip {
     seatMap: string[];
     totalSeats: number;
     ladiesReservedSeats: string[];
+    maleOnlySeats?: string[];
     seatAdjacency: Record<string, string>;
     seatLayout: unknown;
     layoutTemplateId?: string | null;

@@ -13,7 +13,8 @@ import { validateDuration, dueReminderOffset, isWriteBlockedDuringMaintenance, o
 import { matchesFilter, paginate } from '../src/common/logic/log-filter.util';
 import { canDelete, ResourceType } from '../src/common/logic/delete-permission.util';
 import { checkOperatorDuplicate, checkBusRegUnique, checkDriverBusAssignment } from '../src/common/logic/invariants.util';
-import { validateSeatGenderAssignment } from '../src/common/logic/seat-gender.util';
+import { validateSeatGenderAssignment, rankSeatsForFemale } from '../src/common/logic/seat-gender.util';
+import { computeBusCompliance, expiryAlertLevel } from '../src/common/logic/bus-document.util';
 
 let passed = 0;
 let failed = 0;
@@ -870,12 +871,83 @@ check('adjacency: male blocked next to occupied female', validateSeatGenderAssig
 check('adjacency: female allowed next to occupied female', validateSeatGenderAssignment([{ seatNumber: 'L4', gender: 'FEMALE' }], [], { L4: 'L3', L3: 'L4' }, [{ seatNumber: 'L3', gender: 'FEMALE' }]).ok === true);
 check('adjacency: male allowed next to occupied male', validateSeatGenderAssignment([{ seatNumber: 'L4', gender: 'MALE' }], [], { L4: 'L3', L3: 'L4' }, [{ seatNumber: 'L3', gender: 'MALE' }]).ok === true);
 check('adjacency: no pair configured allowed', validateSeatGenderAssignment([{ seatNumber: 'X9', gender: 'MALE' }], [], {}, [{ seatNumber: 'X8', gender: 'FEMALE' }]).ok === true);
-check('within-booking male blocked when paired female together', validateSeatGenderAssignment([{ seatNumber: 'L3', gender: 'FEMALE' }, { seatNumber: 'L4', gender: 'MALE' }], [], { L3: 'L4', L4: 'L3' }, []).ok === false);
+// Spec Scenario 2/7 — couple/family in the SAME booking sit together: ALLOWED.
+check('within-booking couple (F+M same booking) allowed', validateSeatGenderAssignment([{ seatNumber: 'L3', gender: 'FEMALE' }, { seatNumber: 'L4', gender: 'MALE' }], [], { L3: 'L4', L4: 'L3' }, []).ok === true);
+check('within-booking couple blocked when operator forbids same-booking mixing', validateSeatGenderAssignment([{ seatNumber: 'L3', gender: 'FEMALE' }, { seatNumber: 'L4', gender: 'MALE' }], [], { L3: 'L4', L4: 'L3' }, [], { config: { sameBookingMaleFemale: 'BLOCK' } }).ok === false);
 check('mixed-gender non-adjacent allowed', validateSeatGenderAssignment([{ seatNumber: 'C1', gender: 'FEMALE' }, { seatNumber: 'D5', gender: 'MALE' }], [], {}, []).ok === true);
 check('empty assignment valid', validateSeatGenderAssignment([], ['A1'], { L3: 'L4' }, []).ok === true);
 check('female-female adjacent allowed', validateSeatGenderAssignment([{ seatNumber: 'L3', gender: 'FEMALE' }, { seatNumber: 'L4', gender: 'FEMALE' }], [], { L3: 'L4', L4: 'L3' }, []).ok === true);
 check('ladies-reserved error code', validateSeatGenderAssignment([{ seatNumber: 'A1', gender: 'MALE' }], ['A1'], {}, []).code === 'LADIES_RESERVED_SEAT');
 check('adjacency error code', validateSeatGenderAssignment([{ seatNumber: 'L4', gender: 'MALE' }], [], { L4: 'L3' }, [{ seatNumber: 'L3', gender: 'FEMALE' }]).code === 'ADJACENT_FEMALE_SEAT');
+
+// ===== Seat-gender spec scenarios (spec §5-§12, §21-§22, §26) =====
+const PAIR = { A: 'B', B: 'A' } as Record<string, string>;
+// Scenario 1/3 & Case 1 — unrelated male (BK002) next to booked female (BK001): BLOCKED.
+check('spec S1: unrelated male next to female BLOCKED', validateSeatGenderAssignment([{ seatNumber: 'B', gender: 'MALE' }], [], PAIR, [{ seatNumber: 'A', gender: 'FEMALE', bookingId: 'BK001' }]).ok === false);
+// Case 2 — same booking couple: ALLOWED (covered above too).
+check('spec S2: same-booking couple ALLOWED', validateSeatGenderAssignment([{ seatNumber: 'A', gender: 'FEMALE' }, { seatNumber: 'B', gender: 'MALE' }], [], PAIR, []).ok === true);
+// Scenario 4 & Case 3 — female next to female, different bookings: ALLOWED.
+check('spec S4: female-female different bookings ALLOWED', validateSeatGenderAssignment([{ seatNumber: 'B', gender: 'FEMALE' }], [], PAIR, [{ seatNumber: 'A', gender: 'FEMALE', bookingId: 'BK001' }]).ok === true);
+// Scenario 5 — male next to male, different bookings: ALLOWED.
+check('spec S5: male-male different bookings ALLOWED', validateSeatGenderAssignment([{ seatNumber: 'B', gender: 'MALE' }], [], PAIR, [{ seatNumber: 'A', gender: 'MALE', bookingId: 'BK001' }]).ok === true);
+// Case 4 — both-direction protection: female blocked next to unrelated male when configured.
+check('spec C4: both-direction OFF → female next to male allowed', validateSeatGenderAssignment([{ seatNumber: 'B', gender: 'FEMALE' }], [], PAIR, [{ seatNumber: 'A', gender: 'MALE', bookingId: 'BK001' }]).ok === true);
+check('spec C4: both-direction ON → female next to male BLOCKED', validateSeatGenderAssignment([{ seatNumber: 'B', gender: 'FEMALE' }], [], PAIR, [{ seatNumber: 'A', gender: 'MALE', bookingId: 'BK001' }], { config: { bothDirectionProtection: true } }).ok === false);
+// Case 5 — approved linked booking/group: mixed-gender ALLOWED across bookings.
+check('spec C5: linked booking exception ALLOWED', validateSeatGenderAssignment([{ seatNumber: 'B', gender: 'MALE' }], [], PAIR, [{ seatNumber: 'A', gender: 'FEMALE', bookingId: 'BK001' }], { linkedBookingIds: ['BK001'] }).ok === true);
+check('spec C5: linked group id exception ALLOWED', validateSeatGenderAssignment([{ seatNumber: 'B', gender: 'MALE' }], [], PAIR, [{ seatNumber: 'A', gender: 'FEMALE', bookingId: 'BK001', passengerGroupId: 'G7' }], { passengerGroupId: 'G7' }).ok === true);
+check('spec C5: group exception disabled → BLOCKED', validateSeatGenderAssignment([{ seatNumber: 'B', gender: 'MALE' }], [], PAIR, [{ seatNumber: 'A', gender: 'FEMALE', bookingId: 'BK001' }], { linkedBookingIds: ['BK001'], config: { familyGroupException: 'DISABLED' } }).ok === false);
+// §15 — protection disabled: everything adjacent allowed.
+check('spec §15: protection DISABLED → male next to female allowed', validateSeatGenderAssignment([{ seatNumber: 'B', gender: 'MALE' }], [], PAIR, [{ seatNumber: 'A', gender: 'FEMALE', bookingId: 'BK001' }], { config: { femaleAdjacentProtection: 'DISABLED' } }).ok === true);
+check('spec §15: differentBooking ALLOW → male next to female allowed', validateSeatGenderAssignment([{ seatNumber: 'B', gender: 'MALE' }], [], PAIR, [{ seatNumber: 'A', gender: 'FEMALE', bookingId: 'BK001' }], { config: { differentBookingMaleFemale: 'ALLOW' } }).ok === true);
+// §2 — MALE seat gender rule: female blocked on a MALE_ONLY seat.
+check('spec §2: MALE_ONLY seat blocks female', validateSeatGenderAssignment([{ seatNumber: 'M1', gender: 'FEMALE' }], [], {}, [], { maleOnlySeats: ['M1'] }).ok === false);
+check('spec §2: MALE_ONLY seat allows male', validateSeatGenderAssignment([{ seatNumber: 'M1', gender: 'MALE' }], [], {}, [], { maleOnlySeats: ['M1'] }).ok === true);
+// §3 — OTHER / NOT_SPECIFIED genders never trip the male-adjacent rule.
+check('spec §3: OTHER gender next to female allowed', validateSeatGenderAssignment([{ seatNumber: 'B', gender: 'OTHER' }], [], PAIR, [{ seatNumber: 'A', gender: 'FEMALE', bookingId: 'BK001' }]).ok === true);
+// §13 — multi-passenger group booking F|M|F|M all same booking: ALLOWED.
+check('spec §13: F-M-F-M same booking ALLOWED', validateSeatGenderAssignment([
+  { seatNumber: 'S1', gender: 'FEMALE' }, { seatNumber: 'S2', gender: 'MALE' },
+  { seatNumber: 'S3', gender: 'FEMALE' }, { seatNumber: 'S4', gender: 'MALE' },
+], [], { S1: 'S2', S2: 'S1', S3: 'S4', S4: 'S3' }, []).ok === true);
+// §18 — female preferred-seat ranking.
+check('spec §18: rank female-adjacent first', (() => {
+  const ranked = rankSeatsForFemale(['P', 'Q', 'R'], { P: 'X', Q: 'Y', R: 'Z' }, ['R'], [{ seatNumber: 'Y', gender: 'FEMALE', bookingId: 'B1' }]);
+  return ranked[0] === 'Q';
+})());
+console.log('\\n>>> Seat-gender spec scenario checks <<<');
+
+// ===== Bus document lifecycle (Bus Master spec §8/§9/§14) =====
+const DOC_DAY = 24 * 60 * 60 * 1000;
+const T0 = Date.UTC(2026, 0, 1);
+check('doc alert: >30d NONE', expiryAlertLevel(T0 + 45 * DOC_DAY, T0) === 'NONE');
+check('doc alert: 30d WARNING', expiryAlertLevel(T0 + 30 * DOC_DAY, T0) === 'WARNING');
+check('doc alert: 15d ALERT', expiryAlertLevel(T0 + 15 * DOC_DAY, T0) === 'ALERT');
+check('doc alert: 7d CRITICAL', expiryAlertLevel(T0 + 7 * DOC_DAY, T0) === 'CRITICAL');
+check('doc alert: past EXPIRED', expiryAlertLevel(T0 - 1, T0) === 'EXPIRED');
+check('doc alert: null (no expiry type) NONE', expiryAlertLevel(null, T0) === 'NONE');
+const FULLDOCS = (exp: number) => (['RC', 'INSURANCE', 'FITNESS', 'PERMIT', 'POLLUTION'] as const).map((t) => ({ docType: t, documentStatus: 'ACTIVE', expiresAt: t === 'RC' ? null : exp }));
+check('compliance: all valid COMPLIANT', computeBusCompliance(FULLDOCS(T0 + 90 * DOC_DAY), T0).status === 'COMPLIANT');
+check('compliance: expiring soon PARTIALLY_COMPLIANT', computeBusCompliance(FULLDOCS(T0 + 10 * DOC_DAY), T0).status === 'PARTIALLY_COMPLIANT');
+check('compliance: insurance expired NON_COMPLIANT', (() => {
+  const docs = FULLDOCS(T0 + 90 * DOC_DAY).map((d) => (d.docType === 'INSURANCE' ? { ...d, expiresAt: T0 - DOC_DAY } : d));
+  const r = computeBusCompliance(docs, T0);
+  return r.status === 'NON_COMPLIANT' && r.expired.includes('INSURANCE');
+})());
+check('compliance: missing required doc NON_COMPLIANT', (() => {
+  const r = computeBusCompliance(FULLDOCS(T0 + 90 * DOC_DAY).filter((d) => d.docType !== 'PERMIT'), T0);
+  return r.status === 'NON_COMPLIANT' && r.missing.includes('PERMIT');
+})());
+check('compliance: revoked doc treated missing', (() => {
+  const docs = FULLDOCS(T0 + 90 * DOC_DAY).map((d) => (d.docType === 'FITNESS' ? { ...d, documentStatus: 'REVOKED' } : d));
+  return computeBusCompliance(docs, T0).status === 'NON_COMPLIANT';
+})());
+check('compliance: no docs PENDING_REVIEW', computeBusCompliance([], T0).status === 'PENDING_REVIEW');
+check('compliance: latest of duplicate docs wins', (() => {
+  const docs = [...FULLDOCS(T0 + 90 * DOC_DAY), { docType: 'INSURANCE', documentStatus: 'ACTIVE', expiresAt: T0 - DOC_DAY }];
+  return computeBusCompliance(docs, T0).status === 'COMPLIANT';
+})());
+console.log('\\n>>> Bus document lifecycle checks <<<');
 console.log('\\n>>> Gender seat validation checks <<<');
 
 console.log('\n========== EXTENDED TOTAL ==========');

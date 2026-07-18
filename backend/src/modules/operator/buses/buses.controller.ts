@@ -2,7 +2,7 @@ import { RequirePermission } from '../../../common/rbac/require-permission.decor
 import { resolveOperatorScope } from '../../../common/logic/operator-scope.util';
 import { Body, Controller, Delete, Get, Param, Patch, Post, HttpStatus, Query, Put } from '@nestjs/common';
 import { BusesService } from './buses.service';
-import { CreateBusDto , LadiesReservedDto, SeatAdjacencyDto, UpdateBusDto, SetSeatFaresDto, AdjustSeatFaresDto} from './dto/create-bus.dto';
+import { CreateBusDto , LadiesReservedDto, SeatAdjacencyDto, UpdateBusDto, SetSeatFaresDto, AdjustSeatFaresDto, ChangeBusStatusDto, SetAmenitiesDto } from './dto/create-bus.dto';
 import { MapRouteDto } from './dto/map-route.dto';
 import { Roles } from '../../../common/decorators/roles.decorator';
 import { Role } from '../../../common/enums/role.enum';
@@ -52,6 +52,21 @@ export class BusesController {
 
   @Roles(Role.OPERATOR_ADMIN) @Patch(':id')
   update(@CurrentUser() u: JwtUser, @Param('id') id: string, @Body() patch: UpdateBusDto) { return this.buses.update(u.operatorId!, id, patch); }
+
+  /** Bus Master §16.4 — lifecycle: ACTIVE / INACTIVE / UNDER_MAINTENANCE / RETIRED / BLOCKED. */
+  @Roles(Role.OPERATOR_ADMIN) @Patch(':id/status')
+  changeStatus(@CurrentUser() u: JwtUser, @Param('id') id: string, @Body() dto: ChangeBusStatusDto) {
+    return this.buses.setStatus(u.operatorId!, id, dto.status as any, u.id);
+  }
+
+  /** Bus Master §7.E — replace the amenity set for this bus. */
+  @Roles(Role.OPERATOR_ADMIN) @Put(':id/amenities')
+  setAmenities(@CurrentUser() u: JwtUser, @Param('id') id: string, @Body() dto: SetAmenitiesDto) {
+    return this.buses.setAmenities(u.operatorId!, id, dto.amenities);
+  }
+
+  @Roles(Role.OPERATOR_ADMIN, Role.SUPPORT) @Get(':id/amenities')
+  getAmenities(@CurrentUser() u: JwtUser, @Param('id') id: string) { return this.buses.getAmenities(u.operatorId!, id); }
 
   @Roles(Role.OPERATOR_ADMIN) @Patch(':id/deactivate')
   deactivate(@CurrentUser() u: JwtUser, @Param('id') id: string) { return this.buses.setActive(u.operatorId!, id, false); }

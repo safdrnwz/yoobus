@@ -1,6 +1,31 @@
 import { Type } from 'class-transformer';
-import { ArrayMinSize, IsArray, IsEnum, IsInt, IsNumber, IsObject, IsOptional, IsString, Max, Min, ValidateNested } from 'class-validator';
+import { ArrayMinSize, IsArray, IsEnum, IsIn, IsInt, IsNumber, IsObject, IsOptional, IsString, Max, Min, ValidateNested } from 'class-validator';
 import { BusType } from '../../../../common/enums/bus-type.enum';
+const OWNERSHIP_TYPES = ['OWNED', 'LEASED', 'ATTACHED', 'CONTRACTED'] as const;
+const BUS_CATEGORIES = ['STANDARD', 'PREMIUM', 'LUXURY', 'EXECUTIVE'] as const;
+export const BUS_STATUSES = ['ACTIVE', 'INACTIVE', 'UNDER_MAINTENANCE', 'RETIRED', 'BLOCKED'] as const;
+const FUEL_TYPES = ['DIESEL', 'CNG', 'ELECTRIC', 'HYBRID', 'OTHER'] as const;
+const AC_TYPES = ['AC', 'NON_AC'] as const;
+
+/** Vehicle details (Bus Master spec §4.B). All optional; stored on bus.vehicleDetails. */
+export class VehicleDetailsDto {
+  @IsOptional() @IsString() manufacturer?: string;
+  @IsOptional() @IsString() model?: string;
+  @IsOptional() @IsInt() @Min(1980) @Max(2100) modelYear?: number;
+  @IsOptional() @IsString() chassisNumber?: string;
+  @IsOptional() @IsString() engineNumber?: string;
+  @IsOptional() @IsString() vehicleType?: string;
+  @IsOptional() @IsIn(FUEL_TYPES as unknown as string[]) fuelType?: string;
+  @IsOptional() @IsIn(AC_TYPES as unknown as string[]) acType?: string;
+  @IsOptional() @IsString() vehicleColor?: string;
+  @IsOptional() @IsInt() @Min(1) totalVehicleCapacity?: number;
+  @IsOptional() @IsNumber() @Min(0) vehicleLength?: number;
+  @IsOptional() @IsNumber() @Min(0) vehicleWidth?: number;
+  @IsOptional() @IsNumber() @Min(0) vehicleHeight?: number;
+  @IsOptional() @IsNumber() @Min(0) grossVehicleWeight?: number;
+  @IsOptional() @IsNumber() @Min(0) tareWeight?: number;
+}
+
 export class CreateBusDto {
   @IsString() registrationNumber: string;
   @IsString() name: string;
@@ -9,6 +34,23 @@ export class CreateBusDto {
   // drag-and-drop layout (optional); na de to seatMap se simple layout
   @IsOptional() seatLayout?: any;
   @IsOptional() @IsArray() @ArrayMinSize(1) seatMap?: string[];
+
+  // ── Bus Master spec fields (§3.A / §4.B) — all optional, backward compatible.
+  @IsOptional() @IsString() fleetNumber?: string;
+  @IsOptional() @IsIn(OWNERSHIP_TYPES as unknown as string[]) ownershipType?: string;
+  @IsOptional() @IsIn(BUS_CATEGORIES as unknown as string[]) busCategory?: string;
+  @IsOptional() @IsString() registrationDate?: string;
+  @IsOptional() @ValidateNested() @Type(() => VehicleDetailsDto) vehicleDetails?: VehicleDetailsDto;
+}
+
+/** PATCH /buses/:id/status — lifecycle transition (spec §16.4). */
+export class ChangeBusStatusDto {
+  @IsIn(BUS_STATUSES as unknown as string[]) status: string;
+}
+
+/** PUT /buses/:id/amenities — replaces the amenity set (spec §7.E). */
+export class SetAmenitiesDto {
+  @IsArray() @IsString({ each: true }) amenities: string[];
 }
 
 export class LadiesReservedDto {
@@ -32,6 +74,11 @@ export class UpdateBusDto {
   @IsOptional() @IsInt() @Min(1) totalSeats?: number;
   @IsOptional() seatLayout?: unknown;
   @IsOptional() @IsArray() @ArrayMinSize(1) seatMap?: string[];
+  @IsOptional() @IsString() fleetNumber?: string;
+  @IsOptional() @IsIn(OWNERSHIP_TYPES as unknown as string[]) ownershipType?: string;
+  @IsOptional() @IsIn(BUS_CATEGORIES as unknown as string[]) busCategory?: string;
+  @IsOptional() @IsString() registrationDate?: string;
+  @IsOptional() @ValidateNested() @Type(() => VehicleDetailsDto) vehicleDetails?: VehicleDetailsDto;
 }
 
 /**

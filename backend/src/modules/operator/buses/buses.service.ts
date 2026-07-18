@@ -8,6 +8,7 @@ import { Role } from '../../../common/enums/role.enum';
 import { EmailService } from '../../integrations/email/email.service';
 import { Repository } from 'typeorm';
 import { Bus } from './entities/bus.entity';
+import { AMENITY_CATALOG, BusAmenity } from './entities/bus-amenity.entity';
 import { Route } from '../routes/entities/route.entity';
 import { Trip } from '../trips/entities/trip.entity';
 import { SetupInvoice } from '../../finance/billing/entities/setup-invoice.entity';
@@ -25,6 +26,7 @@ export class BusesService {
     @InjectRepository(Trip) private readonly tripRepo: Repository<Trip>,
     @InjectRepository(SetupInvoice) private readonly invoiceRepo: Repository<SetupInvoice>,
     @InjectRepository(User) private readonly userRepo: Repository<User>,
+    @InjectRepository(BusAmenity) private readonly amenityRepo: Repository<BusAmenity>,
     private readonly email: EmailService,
     private readonly config: ConfigService,
   ) {}
@@ -38,10 +40,18 @@ export class BusesService {
     const seatMap = dto.seatMap?.length ? dto.seatMap : Array.from({ length: dto.totalSeats }, (_, i) => `${i + 1}`);
     const seatLayout = dto.seatLayout || { decks: [{ rows: Math.ceil(dto.totalSeats / 4), cols: 4, cells: seatMap.map((s: string) => ({ type: 'seat', seatNumber: s })) }] };
 
+    await this.assertVehicleIdentityUnique(operatorId, dto.vehicleDetails, dto.fleetNumber);
+
     const bus = await this.busRepo.save(this.busRepo.create({
       registrationNumber: dto.registrationNumber.toUpperCase().replace(/\s+/g, ''),
       operatorId, name: dto.name, busType: dto.busType, totalSeats: dto.totalSeats,
       seatMap, seatLayout,
+      fleetNumber: dto.fleetNumber ?? null,
+      ownershipType: dto.ownershipType ?? null,
+      busCategory: dto.busCategory ?? null,
+      registrationDate: dto.registrationDate ?? null,
+      vehicleDetails: dto.vehicleDetails ?? {},
+      createdBy: dto.createdBy ?? null,
     }));
 
     // One-time setup invoice (idempotent: exactly one per bus).
@@ -87,13 +97,47 @@ export class BusesService {
     return this.busRepo.save(bus);
   }
 
-  async update(operatorId: string, id: string, patch: { name?: string; busType?: any; seatMap?: string[]; seatLayout?: any }) {
+  /**
+   * Bus Master §4.B — chassis/engine numbers and the fleet number must be unique
+   * within the operator, where supplied. jsonb keys cannot carry a portable partial
+   * unique index, so the invariant lives here.
+   */
+  private async assertVehicleIdentityUnique(
+    operatorId: string,
+    details?: { chassisNumber?: string; engineNumber?: string } | null,
+    fleetNumber?: string | null,
+    excludeBusId?: string,
+  ) {
+    const siblings = (await this.busRepo.find({ where: { operatorId } }))
+      .filter((b) => b.id !== excludeBusId);
+    const clash = (label: string, value?: string | null, pick?: (b: Bus) => string | undefined) => {
+      if (!value) return;
+      const v = value.trim().toUpperCase();
+      if (v && siblings.some((b) => (pick!(b) ?? '').trim().toUpperCase() === v)) {
+        throw new AppException('DUPLICATE_' + label, `${label.replace('_', ' ')} "${value}" is already used by another bus of this operator.`, HttpStatus.CONFLICT);
+      }
+    };
+    clash('FLEET_NUMBER', fleetNumber, (b) => b.fleetNumber ?? undefined);
+    clash('CHASSIS_NUMBER', details?.chassisNumber, (b) => b.vehicleDetails?.chassisNumber);
+    clash('ENGINE_NUMBER', details?.engineNumber, (b) => b.vehicleDetails?.engineNumber);
+  }
+
+  async update(operatorId: string, id: string, patch: { name?: string; busType?: any; seatMap?: string[]; seatLayout?: any; fleetNumber?: string; ownershipType?: any; busCategory?: any; registrationDate?: string; vehicleDetails?: any; updatedBy?: string }) {
     const bus = await this.findById(id);
     if (bus.operatorId !== operatorId) throw new AppException('CROSS_OPERATOR_FORBIDDEN', 'This bus does not belong to your operator', HttpStatus.FORBIDDEN);
+    if (patch.fleetNumber !== undefined || patch.vehicleDetails !== undefined) {
+      await this.assertVehicleIdentityUnique(operatorId, patch.vehicleDetails ?? bus.vehicleDetails, patch.fleetNumber ?? bus.fleetNumber, bus.id);
+    }
     if (patch.name !== undefined) bus.name = patch.name;
     if (patch.busType !== undefined) bus.busType = patch.busType;
     if (patch.seatMap !== undefined) bus.seatMap = patch.seatMap;
     if (patch.seatLayout !== undefined) bus.seatLayout = patch.seatLayout;
+    if (patch.fleetNumber !== undefined) bus.fleetNumber = patch.fleetNumber;
+    if (patch.ownershipType !== undefined) bus.ownershipType = patch.ownershipType;
+    if (patch.busCategory !== undefined) bus.busCategory = patch.busCategory;
+    if (patch.registrationDate !== undefined) bus.registrationDate = patch.registrationDate;
+    if (patch.vehicleDetails !== undefined) bus.vehicleDetails = { ...(bus.vehicleDetails ?? {}), ...patch.vehicleDetails };
+    if (patch.updatedBy !== undefined) bus.updatedBy = patch.updatedBy;
     return this.busRepo.save(bus);
   }
 
@@ -101,7 +145,49 @@ export class BusesService {
     const bus = await this.findById(id);
     if (bus.operatorId !== operatorId) throw new AppException('CROSS_OPERATOR_FORBIDDEN', 'This bus does not belong to your operator', HttpStatus.FORBIDDEN);
     bus.isActive = active;
+    // Keep the lifecycle status in step with the legacy boolean.
+    if (active) bus.busStatus = 'ACTIVE';
+    else if (bus.busStatus === 'ACTIVE') bus.busStatus = 'INACTIVE';
     return this.busRepo.save(bus);
+  }
+
+  /**
+   * Bus Master §3.A.7 / §16.4 — lifecycle status transition. `isActive` (which the
+   * whole booking chain reads) stays synced: only ACTIVE buses are bookable.
+   */
+  async setStatus(operatorId: string, id: string, status: Bus['busStatus'], updatedBy?: string) {
+    const bus = await this.findById(id);
+    if (bus.operatorId !== operatorId) throw new AppException('CROSS_OPERATOR_FORBIDDEN', 'This bus does not belong to your operator', HttpStatus.FORBIDDEN);
+    bus.busStatus = status;
+    bus.isActive = status === 'ACTIVE';
+    if (updatedBy) bus.updatedBy = updatedBy;
+    return this.busRepo.save(bus);
+  }
+
+  /**
+   * Bus Master §7.E — amenities, stored separately from the Bus row.
+   * Replaces the whole set (idempotent PUT semantics); validates against the catalogue.
+   */
+  async setAmenities(operatorId: string, busId: string, amenities: string[]) {
+    const bus = await this.findById(busId);
+    if (bus.operatorId !== operatorId) throw new AppException('CROSS_OPERATOR_FORBIDDEN', 'This bus does not belong to your operator', HttpStatus.FORBIDDEN);
+    const wanted = [...new Set((amenities ?? []).map((a) => a.trim().toUpperCase()))];
+    const invalid = wanted.filter((a) => !(AMENITY_CATALOG as readonly string[]).includes(a));
+    if (invalid.length) {
+      throw new AppException('INVALID_AMENITY', `Unknown amenity(ies): ${invalid.join(', ')}. Allowed: ${AMENITY_CATALOG.join(', ')}`, HttpStatus.BAD_REQUEST);
+    }
+    await this.amenityRepo.delete({ busId });
+    if (wanted.length) {
+      await this.amenityRepo.save(wanted.map((a) => this.amenityRepo.create({ operatorId, busId, amenity: a as any })));
+    }
+    return { busId, amenities: wanted };
+  }
+
+  async getAmenities(operatorId: string, busId: string) {
+    const bus = await this.findById(busId);
+    if (bus.operatorId !== operatorId) throw new AppException('CROSS_OPERATOR_FORBIDDEN', 'This bus does not belong to your operator', HttpStatus.FORBIDDEN);
+    const rows = await this.amenityRepo.find({ where: { busId }, order: { amenity: 'ASC' } });
+    return { busId, amenities: rows.map((r) => r.amenity) };
   }
 
   /**

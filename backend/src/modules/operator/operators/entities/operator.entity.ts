@@ -31,6 +31,15 @@ export class Operator {
   @Column({ type: 'jsonb', default: () => "'{}'" })
   extraCharges: Record<string, number>;
 
+  /**
+   * Operator-configurable gender seat rules (seat-gender spec §15/§23).
+   * Partial — anything unset falls back to DEFAULT_GENDER_RULES (spec §24):
+   * { femaleAdjacentProtection, differentBookingMaleFemale, sameBookingMaleFemale,
+   *   bothDirectionProtection, familyGroupException }
+   */
+  @Column({ type: 'jsonb', default: () => "'{}'" })
+  genderRules: Record<string, any>;
+
   @Index({ unique: true })
   @Column({ type: 'varchar', length: 200 })
   legalName: string;

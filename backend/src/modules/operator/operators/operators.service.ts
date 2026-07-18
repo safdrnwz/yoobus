@@ -1,3 +1,4 @@
+import { GenderRuleConfig, resolveGenderRules } from '../../../common/logic/seat-gender.util';
 import { Injectable, HttpStatus } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -186,6 +187,25 @@ export class OperatorsService {
       recipientOperatorId: o.id,
     });
     return saved;
+  }
+
+  /**
+   * Seat-gender spec §15/§23 — operator-configurable gender rules. Stored as a
+   * PARTIAL config; anything unset falls back to the platform defaults (§24).
+   */
+  async setGenderRules(operatorId: string, partial: Partial<GenderRuleConfig>) {
+    const o = await this.findOperator(operatorId);
+    const allowedKeys = ['femaleAdjacentProtection', 'differentBookingMaleFemale', 'sameBookingMaleFemale', 'bothDirectionProtection', 'familyGroupException'];
+    const clean: Record<string, any> = {};
+    for (const k of allowedKeys) if ((partial as any)[k] !== undefined) clean[k] = (partial as any)[k];
+    o.genderRules = { ...(o.genderRules ?? {}), ...clean };
+    await this.opRepo.save(o);
+    return { operatorId: o.id, genderRules: resolveGenderRules(o.genderRules) };
+  }
+
+  async getGenderRules(operatorId: string) {
+    const o = await this.findOperator(operatorId);
+    return { operatorId: o.id, genderRules: resolveGenderRules(o.genderRules), configured: o.genderRules ?? {} };
   }
 
   // Phase 3: white-label branding (operator-admin sets own; public reads storefront).

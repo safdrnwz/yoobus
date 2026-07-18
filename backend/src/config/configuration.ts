@@ -9,6 +9,12 @@ export default () => ({
     keyId: process.env.RAZORPAY_KEY_ID,
     keySecret: process.env.RAZORPAY_KEY_SECRET,
   },
+  cloudinary: {
+    // cloudinary://<api_key>:<api_secret>@<cloud_name> — set in .env, NEVER committed.
+    url: process.env.CLOUDINARY_URL || '',
+    folder: process.env.CLOUDINARY_FOLDER || 'yoobus',
+    maxFileSizeMb: parseInt(process.env.UPLOAD_MAX_MB ?? '5', 10),
+  },
   app: {
     name: process.env.APP_NAME || 'Yoo Bus',
     env: process.env.NODE_ENV || 'development',

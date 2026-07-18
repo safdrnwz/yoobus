@@ -93,6 +93,10 @@ export class TripsService {
     if (!bus) throw new AppException('BUS_NOT_FOUND', 'Bus not found', HttpStatus.NOT_FOUND);
     if (bus.operatorId !== operatorId) throw new AppException('CROSS_OPERATOR_FORBIDDEN', 'Bus does not belong to your operator', HttpStatus.FORBIDDEN);
     if (!bus.isActive) throw new AppException('BUS_INACTIVE', 'Bus is inactive', HttpStatus.BAD_REQUEST);
+    // Bus Master §21.2/§21.3 — a bus that is not operationally ACTIVE cannot take a new trip.
+    if (bus.busStatus && bus.busStatus !== 'ACTIVE') {
+      throw new AppException('BUS_NOT_ASSIGNABLE', `Bus is ${bus.busStatus.toLowerCase().replace('_', ' ')} and cannot be assigned to a new trip`, HttpStatus.BAD_REQUEST);
+    }
 
     const route = await this.routeRepo.findOne({ where: { id: dto.routeId } });
     if (!route) throw new AppException('ROUTE_NOT_FOUND', 'Route not found', HttpStatus.NOT_FOUND);
@@ -113,6 +117,7 @@ export class TripsService {
         seatMap: [...(bus.seatMap ?? [])],
         totalSeats: bus.totalSeats,
         ladiesReservedSeats: [...(bus.ladiesReservedSeats ?? [])],
+        maleOnlySeats: [...(bus.maleOnlySeats ?? [])],
         seatAdjacency: { ...(bus.seatAdjacency ?? {}) },
         seatLayout: bus.seatLayout ?? null,
         layoutTemplateId: bus.layoutTemplateId ?? null,
@@ -172,6 +177,7 @@ export class TripsService {
       seatMap: snap?.seatMap ?? bus.seatMap ?? [],
       totalSeats: snap?.totalSeats ?? bus.totalSeats,
       ladiesReservedSeats: snap?.ladiesReservedSeats ?? bus.ladiesReservedSeats ?? [],
+      maleOnlySeats: snap?.maleOnlySeats ?? bus.maleOnlySeats ?? [],
       seatAdjacency: snap?.seatAdjacency ?? bus.seatAdjacency ?? {},
       seatLayout: snap?.seatLayout ?? bus.seatLayout ?? null,
     };

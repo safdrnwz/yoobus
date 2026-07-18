@@ -13,4 +13,6 @@ export class CreateBookingDto {
   @IsArray() @ArrayMinSize(1) @ValidateNested({ each: true }) @Type(() => PassengerDto) passengers: PassengerDto[];
   @IsOptional() @IsBoolean() optInsurance?: boolean;
   @IsOptional() @IsString() couponCode?: string;
+  /** Link to your own booking on the same trip (approved-group exception, gender spec Case 5). */
+  @IsOptional() @IsString() linkedPnr?: string;
 }

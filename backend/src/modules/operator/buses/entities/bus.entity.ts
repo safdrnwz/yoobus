@@ -25,6 +25,44 @@ export class Bus {
   @Column({ type: 'int' })
   totalSeats: number;
 
+  /* ───────────── Bus Master spec — identity & lifecycle (§3.A) ───────────── */
+
+  /** Internal fleet identifier, unique per operator. e.g. BUS-001. */
+  @Index()
+  @Column({ type: 'varchar', length: 40, nullable: true })
+  fleetNumber: string | null;
+
+  /**
+   * Operational lifecycle status (§3.A.7). `isActive` below is kept as the legacy
+   * boolean the booking chain reads; it is always synced to (busStatus === ACTIVE).
+   */
+  @Index()
+  @Column({ type: 'varchar', length: 20, default: 'ACTIVE' })
+  busStatus: 'ACTIVE' | 'INACTIVE' | 'UNDER_MAINTENANCE' | 'RETIRED' | 'BLOCKED';
+
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  ownershipType: 'OWNED' | 'LEASED' | 'ATTACHED' | 'CONTRACTED' | null;
+
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  busCategory: 'STANDARD' | 'PREMIUM' | 'LUXURY' | 'EXECUTIVE' | null;
+
+  @Column({ type: 'date', nullable: true })
+  registrationDate: string | null;
+
+  /**
+   * Vehicle details (§4.B) as one document — manufacturer, model, modelYear,
+   * chassisNumber, engineNumber, vehicleType, fuelType, acType, vehicleColor,
+   * totalVehicleCapacity, dimensions, weights. Chassis/engine uniqueness is
+   * enforced in the service (per operator) since jsonb keys can't carry a
+   * partial unique index portably.
+   */
+  @Column({ type: 'jsonb', default: () => "'{}'" })
+  vehicleDetails: Record<string, any>;
+
+  /* ───────────── Audit (§15.M) — soft delete already via deletedAt ───────────── */
+  @Column({ type: 'uuid', nullable: true }) createdBy: string | null;
+  @Column({ type: 'uuid', nullable: true }) updatedBy: string | null;
+
   // drag-and-drop seat layout (cells: seat/aisle/gap/door), + seat attributes
   @Column({ type: 'jsonb' })
   seatLayout: any; // { decks:[{rows, cols, cells:[{type, seatNumber, attrs}]}] }
@@ -36,6 +74,10 @@ export class Bus {
   // e.g. ["L3", "L4", "U7"] — only female passengers may book these.
   @Column({ type: 'jsonb', default: () => "'[]'" })
   ladiesReservedSeats: string[];
+
+  /** Seats restricted to male passengers (seat gender rule MALE). Derived from layout or set directly. */
+  @Column({ type: 'jsonb', default: () => "'[]'" })
+  maleOnlySeats: string[];
 
   // Seat adjacency map for paired-seat gender validation.
   // e.g. { "L4": "L3", "L3": "L4" } — L3 & L4 are a paired berth/pair.

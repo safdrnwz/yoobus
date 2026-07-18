@@ -7,9 +7,18 @@ import { Roles } from '../../../common/decorators/roles.decorator';
 import { Role } from '../../../common/enums/role.enum';
 import { OperatorStatus } from '../../../common/enums/operator-status.enum';
 import { CurrentUser, JwtUser } from '../../../common/decorators/current-user.decorator';
-import { IsObject } from 'class-validator';
+import { IsBoolean, IsIn, IsObject, IsOptional } from 'class-validator';
 
 export class BrandingDto { @IsObject() branding: any; }
+
+/** Partial operator gender-rule configuration (seat-gender spec §15/§24). */
+export class GenderRulesDto {
+  @IsOptional() @IsIn(['ENABLED', 'DISABLED']) femaleAdjacentProtection?: string;
+  @IsOptional() @IsIn(['BLOCK', 'ALLOW']) differentBookingMaleFemale?: string;
+  @IsOptional() @IsIn(['ALLOW', 'BLOCK']) sameBookingMaleFemale?: string;
+  @IsOptional() @IsBoolean() bothDirectionProtection?: boolean;
+  @IsOptional() @IsIn(['ENABLED', 'DISABLED']) familyGroupException?: string;
+}
 
 @Controller('operators')
 export class OperatorsController {
@@ -57,6 +66,14 @@ export class OperatorsController {
   // Operator-admin sets own storefront branding (operator-scoped).
   @Roles(Role.OPERATOR_ADMIN) @Patch('branding/me')
   setBranding(@CurrentUser() u: JwtUser, @Body() dto: BrandingDto) { return this.ops.setBranding(u.operatorId!, dto.branding); }
+
+  /** Seat-gender spec §15 — operator reads own gender seat rules (defaults merged in). */
+  @Roles(Role.OPERATOR_ADMIN, Role.SUPPORT) @Get('gender-rules/me')
+  getGenderRules(@CurrentUser() u: JwtUser) { return this.ops.getGenderRules(u.operatorId!); }
+
+  /** Seat-gender spec §15 — operator configures own gender seat rules (partial update). */
+  @Roles(Role.OPERATOR_ADMIN) @Patch('gender-rules/me')
+  setGenderRules(@CurrentUser() u: JwtUser, @Body() dto: GenderRulesDto) { return this.ops.setGenderRules(u.operatorId!, dto as any); }
 
   // Public storefront branding fetch.
   @Public() @Get(':id/branding')

@@ -18,7 +18,8 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "types": [
-      "node"
+      "node",
+      "multer"
     ]
   }
 }

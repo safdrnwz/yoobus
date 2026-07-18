@@ -5,6 +5,58 @@ development (the app builds the schema from entities via `synchronize`); for pro
 migrations from the updated entities. Everything is in English and follows the existing
 architecture (services, `{ok,code,message}` invariants, per-operator isolation, RBAC catalog).
 
+## NEW — Seat-gender allocation spec + Bus Master spec + Cloudinary uploads (2026-07-18)
+
+### 1. Gender-based seat allocation (full spec implementation)
+- `common/logic/seat-gender.util.ts` rewritten to the "Seat Layout & Gender-Based Seat
+  Allocation" spec. **Behaviour fix:** a couple/family in the SAME booking may now sit on a
+  paired seat (spec Scenario 2/7); previously even same-booking mixed-gender pairs were blocked.
+- Operator-configurable `GenderRuleConfig` (spec §15/§23/§24): `femaleAdjacentProtection`,
+  `differentBookingMaleFemale`, `sameBookingMaleFemale`, `bothDirectionProtection` (Case 4,
+  §22 Option B), `familyGroupException`. Stored as partial jsonb on `operators.genderRules`;
+  defaults = spec §24. New endpoints: `GET/PATCH /operators/gender-rules/me`.
+- Occupied seats are now compared WITH their booking id → same-booking / linked-booking
+  (Case 5, `linkedPnr` on booking create) exceptions work across the confirmation path.
+- MALE_ONLY seats are now enforced (layout already drew them; nothing checked them). Derived
+  into `bus.maleOnlySeats` on layout assignment and snapshotted per trip.
+- Validation now also runs at **seat-lock** time (spec §19.3) when the hold carries passenger
+  genders (`HoldDto.passengers` optional) — final mandatory validation stays at confirmation.
+- `rankSeatsForFemale()` implements the §18 female-preferred-seat ranking (preference only).
+
+### 2. Bus Master spec
+- `Bus` entity extended: `fleetNumber` (unique per operator), `busStatus`
+  (ACTIVE/INACTIVE/UNDER_MAINTENANCE/RETIRED/BLOCKED, kept in sync with legacy `isActive`),
+  `ownershipType`, `busCategory`, `registrationDate`, `vehicleDetails` jsonb (manufacturer,
+  model, chassis/engine numbers — chassis/engine uniqueness enforced per operator in the
+  service), audit `createdBy`/`updatedBy`. New endpoint: `PATCH /buses/:id/status`.
+- Trip assignment rule (§21.2/3): a bus that is not operationally ACTIVE cannot take a new trip.
+- Amenities (§7.E): new `bus_amenities` table + catalogue; `PUT/GET /buses/:id/amenities`.
+- Documents (§8.F): existing `fleet_vehicle_documents` extended in place (no duplicate table)
+  with the full doc-type catalogue, issue date, issuing authority, file url/name, document
+  status, verification status (+ verifiedBy/At), remarks. Expiry mandatory per doc-type config
+  (`common/logic/bus-document.util.ts`). New endpoints under `operator/fleet`:
+  `PATCH vehicle-documents/:id`, `PATCH vehicle-documents/:id/verify`,
+  `POST vehicle-documents/:id/file` (CDN upload), `GET buses/:busId/documents`.
+- Expiry alerts (§9.G): graded levels 30d WARNING / 15d ALERT / 7d CRITICAL / EXPIRED on every
+  document listing.
+- Compliance (§14.L): `GET operator/fleet/buses/:busId/compliance` computes
+  COMPLIANT / PARTIALLY_COMPLIANT / NON_COMPLIANT / PENDING_REVIEW from required documents
+  (RC, INSURANCE, FITNESS, PERMIT, POLLUTION) + operational status.
+
+### 3. Cloudinary CDN uploads (app-wide)
+- New `integrations/uploads` module: `UploadsService` (single home for every file/image upload)
+  + generic authenticated `POST /uploads?kind=...` (multipart field `file`). Validates MIME
+  (jpeg/png/webp/gif/pdf) and size (`UPLOAD_MAX_MB`, default 5 MB), uploads to Cloudinary,
+  returns the CDN url. Bus-document file endpoint delegates here.
+- Config via `CLOUDINARY_URL` in `.env` only (`cloudinary://<key>:<secret>@<cloud>`), plus
+  `CLOUDINARY_FOLDER`, `UPLOAD_MAX_MB`. **The secret is never in code or git.** If uploads are
+  not configured the endpoints answer 503 with a clear message; the rest of the app is unaffected.
+
+### Tests
+- `test/logic-extended.test.ts`: same-booking couple expectation corrected to the spec, plus a
+  full spec-scenario suite (S1–S5, C4, C5, §13, §15, §18, §22, MALE_ONLY) and a bus-document
+  suite (alert levels + compliance). All logic suites green; `tsc --noEmit` and `nest build` clean.
+
 ## A. Plans/tiers removed — every operator is equal, with per-operator billing
 
 - Removed the entire plan / subscription / entitlement-gating system. Every operator now has

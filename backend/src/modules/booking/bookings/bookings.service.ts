@@ -26,6 +26,7 @@ import { TripStatus } from '../../../common/enums/trip-status.enum';
 import { AC_BUS_TYPES } from '../../../common/enums/bus-type.enum';
 import { segmentFare , seatFare } from '../../../common/logic/fare.util';
 import { validateSeatGenderAssignment } from '../../../common/logic/seat-gender.util';
+import type { GenderRuleConfig } from '../../../common/logic/seat-gender.util';
 import { SeatAlertService } from '../seat-alert/seat-alert.service';
 import { FareFreezeService } from '../../finance/fare-freeze/fare-freeze.service';
 import { CouponsService } from '../../finance/coupons/coupons.service';
@@ -58,6 +59,7 @@ function seatingOf(trip: any, bus: any) {
     seatMap: (snap?.seatMap ?? bus.seatMap ?? []) as string[],
     totalSeats: (snap?.totalSeats ?? bus.totalSeats) as number,
     ladiesReservedSeats: (snap?.ladiesReservedSeats ?? bus.ladiesReservedSeats ?? []) as string[],
+    maleOnlySeats: (snap?.maleOnlySeats ?? bus.maleOnlySeats ?? []) as string[],
     seatAdjacency: (snap?.seatAdjacency ?? bus.seatAdjacency ?? {}) as Record<string, string>,
   };
 }
@@ -133,7 +135,7 @@ export class BookingsService {
   }
 
   // ---- PHASE 1: SEAT HOLD (TTL) ----
-  async hold(dto: { tripId: string; boardingStopId: string; droppingStopId: string; seatNumbers: string[]; freezeToken?: string }) {
+  async hold(dto: { tripId: string; boardingStopId: string; droppingStopId: string; seatNumbers: string[]; freezeToken?: string; passengers?: Array<{ seatNumber: string; gender: string }> }) {
     const { trip, route, bus } = await this.trips.findFull(dto.tripId);
     if (trip.status !== TripStatus.SCHEDULED) throw new AppException('TRIP_CLOSED', 'Booking is closed for this trip', HttpStatus.BAD_REQUEST);
     await this.releaseExpired(trip.id);
@@ -143,6 +145,26 @@ export class BookingsService {
     const seating = seatingOf(trip, bus);
     const invalid = dto.seatNumbers.filter((s) => !seating.seatMap.includes(s));
     if (invalid.length) throw new AppException('INVALID_SEAT', `Invalid seat(s): ${invalid.join(', ')}`, HttpStatus.BAD_REQUEST);
+
+    // Seat-gender spec §19.3 — revalidate gender rules BEFORE locking, when the caller
+    // already knows passenger genders. (Final mandatory validation still happens at
+    // booking confirmation; this simply fails fast at seat-selection time.)
+    if (dto.passengers?.length) {
+      const occ: Array<{ seatNumber: string; passengerGender: string; bookingId: string }> = await this.dataSource.query(
+        `SELECT bs."seatNumber", bs."passengerGender", bs.booking_id AS "bookingId"
+           FROM booking_seats bs WHERE bs.trip_id = $1 AND bs.is_active = true`,
+        [trip.id],
+      );
+      const op = await this.opRepo.findOne({ where: { id: trip.operatorId } });
+      const early = validateSeatGenderAssignment(
+        dto.passengers.map((p) => ({ seatNumber: p.seatNumber, gender: p.gender })),
+        seating.ladiesReservedSeats,
+        seating.seatAdjacency,
+        occ.map((r) => ({ seatNumber: r.seatNumber, gender: r.passengerGender, bookingId: r.bookingId })),
+        { config: (op as any)?.genderRules, maleOnlySeats: seating.maleOnlySeats },
+      );
+      if (!early.ok) throw new AppException(early.code!, early.message!, HttpStatus.BAD_REQUEST);
+    }
 
     return this.dataSource.transaction(async (m) => {
       const seatRepo = m.getRepository(BookingSeat);
@@ -197,7 +219,7 @@ export class BookingsService {
   }
 
   // ---- Booking from hold => PENDING ----
-  async createFromHold(userId: string, dto: { holdToken: string; passengers: any[]; optInsurance?: boolean; couponCode?: string; source?: string; channelCode?: string; otaRef?: string }) {
+  async createFromHold(userId: string, dto: { holdToken: string; passengers: any[]; optInsurance?: boolean; couponCode?: string; source?: string; channelCode?: string; otaRef?: string; linkedPnr?: string }) {
     // Requirement 4 — profile-completion gate: a passenger cannot book until
     // their profile has Full Name + Date of Birth + Gender. (Skip for OTA/agent flows
     // where the booking is made on behalf of a walk-in guest via source override.)
@@ -252,17 +274,36 @@ export class BookingsService {
       if (!p.name || p.age == null || !p.gender) throw new AppException('PASSENGER_INCOMPLETE', 'Passenger name, age and gender are required.', HttpStatus.BAD_REQUEST);
     }
 
-    // Requirements 7-10 — gender-based seat validation (ladies-reserved + adjacency).
-    // Fetch seats already occupied on this trip (active bookings) with their genders.
-    const occupiedRows: Array<{ seatNumber: string; passengerGender: string }> = await this.dataSource.query(
-      `SELECT "seatNumber", "passengerGender" FROM booking_seats WHERE trip_id = $1 AND is_active = true`,
+    // Seat-gender spec §19/§20 — server-side validation at booking confirmation.
+    // Occupied seats are fetched WITH their booking id, so the same-booking and
+    // linked-booking (approved group) exceptions can be applied correctly.
+    const occupiedRows: Array<{ seatNumber: string; passengerGender: string; bookingId: string }> = await this.dataSource.query(
+      `SELECT bs."seatNumber", bs."passengerGender", bs.booking_id AS "bookingId"
+         FROM booking_seats bs WHERE bs.trip_id = $1 AND bs.is_active = true`,
       [tripId],
     );
+    // Optional linked booking (Case 5 — approved passenger group): the caller may
+    // link this booking to one of THEIR OWN previous bookings on the same trip so a
+    // family split across two PNRs can still sit together.
+    let linkedBookingIds: string[] = [];
+    if (dto.linkedPnr) {
+      const linked = await this.bookingRepo.findOne({ where: { pnr: dto.linkedPnr.toUpperCase() } });
+      if (!linked || linked.userId !== userId || linked.tripId !== tripId) {
+        throw new AppException('LINKED_PNR_INVALID', 'Linked PNR must be your own booking on the same trip.', HttpStatus.BAD_REQUEST);
+      }
+      linkedBookingIds = [linked.id];
+    }
+    const seating = seatingOf(trip, bus);
     const seatCheck = validateSeatGenderAssignment(
       dto.passengers.map((p) => ({ seatNumber: p.seatNumber, gender: p.gender })),
-      seatingOf(trip, bus).ladiesReservedSeats,
-      seatingOf(trip, bus).seatAdjacency,
-      occupiedRows.map((r) => ({ seatNumber: r.seatNumber, gender: r.passengerGender })),
+      seating.ladiesReservedSeats,
+      seating.seatAdjacency,
+      occupiedRows.map((r) => ({ seatNumber: r.seatNumber, gender: r.passengerGender, bookingId: r.bookingId })),
+      {
+        config: (operator as any).genderRules as Partial<GenderRuleConfig>,
+        maleOnlySeats: seating.maleOnlySeats,
+        linkedBookingIds,
+      },
     );
     if (!seatCheck.ok) {
       throw new AppException(seatCheck.code!, seatCheck.message!, HttpStatus.BAD_REQUEST);

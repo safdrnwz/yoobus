@@ -227,6 +227,7 @@ export class SeatLayoutsService {
     bus.seatMap = derived.seatMap;
     bus.totalSeats = derived.totalSeats;
     bus.ladiesReservedSeats = derived.ladiesReservedSeats;
+    bus.maleOnlySeats = derived.maleOnlySeats;
     bus.seatAdjacency = derived.seatAdjacency;
 
     return this.buses.save(bus);

@@ -321,6 +321,8 @@ export interface DerivedBusSeating {
   seatMap: string[];
   totalSeats: number;
   ladiesReservedSeats: string[];
+  /** Seats drawn MALE_ONLY in the layout — enforced by the gender rules at booking time. */
+  maleOnlySeats: string[];
   seatAdjacency: Record<string, string>;
   /** Zone per seat, so the pricing engine can price a zone rather than 40 individual seats. */
   seatZones: Record<string, FareZone>;
@@ -389,6 +391,10 @@ export function deriveBusSeating(def: LayoutDefinition): DerivedBusSeating {
     .filter((i) => i.props?.gender === 'FEMALE_ONLY' || i.props?.fareZone === 'LADIES')
     .map((i) => i.seatNumber!.toUpperCase());
 
+  const maleOnlySeats = bookable
+    .filter((i) => i.props?.gender === 'MALE_ONLY')
+    .map((i) => i.seatNumber!.toUpperCase());
+
   const seatZones: Record<string, FareZone> = {};
   for (const i of bookable) seatZones[i.seatNumber!.toUpperCase()] = i.props?.fareZone ?? 'STANDARD';
 
@@ -400,6 +406,7 @@ export function deriveBusSeating(def: LayoutDefinition): DerivedBusSeating {
     seatMap,
     totalSeats: seatMap.length,
     ladiesReservedSeats,
+    maleOnlySeats,
     seatAdjacency,
     seatZones,
   };
